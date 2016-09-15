@@ -1,4 +1,4 @@
 module.exports = {
-	bucket: 'newmemly',
-	region: 'us-west-1'
+  bucket: 'newmemly',
+  region: 'us-west-1'
 };
