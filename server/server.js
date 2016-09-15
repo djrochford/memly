@@ -61,6 +61,52 @@ app.get('/', function(req, res) {
 });
 
 
+app.get('/user/journeys', function(req, res) {
+
+ res.send({
+    journeys: [
+      {
+        userId: '3lkjrlfjei3orjlkf',
+        journeyTitle: 'Story of my life',
+        visits: 1,
+        createdDate: '2016-09-15T03:05:39.182Z',
+        pages: [
+          {
+            order: 0,
+            memlyId: 'jfkljfj3239283492fj',
+            imgUrl: 'http://dagobah.net/t200/poptartcat.jpg',
+            location: {
+              lat: 37.7929053,
+              lng: -122.399253
+            },
+            caption: 'This is where I fell down.'
+          },
+          {
+            order: 1,
+            memlyId: 'saldkjfsselej',
+            imgUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg',
+            location: {
+              lat: 19.2323,
+              lng: 44.4
+            },
+            caption: 'So scare'
+          },
+          {
+            order: 2,
+            memlyId: 'hoopadoop',
+            imgUrl: 'https://pbs.twimg.com/profile_images/616542814319415296/McCTpH_E.jpg',
+            location: {
+              lat: -167.9,
+              lng: - 14
+            },
+            caption: 'I\'m grumpy.'
+          },
+        ],
+      }
+    ]
+  });
+});
+
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000/#' }),
   function(req, res) {

@@ -21,7 +21,7 @@ const reducers = combineReducers({
 // (see 'redux/' for actions)
 const store = createStore(reducers);
 
-render(
+render (
   // Provider will make the Redux-Store (state tree) accessible to ALL components. 
   //(React specific helper module for simplifying redux!)
   <Provider store={store}>
@@ -29,3 +29,5 @@ render(
   </Provider>
   , document.getElementById('app')
 );
+
+export default store

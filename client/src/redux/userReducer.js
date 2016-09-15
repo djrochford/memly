@@ -78,6 +78,13 @@ export function increaseMemlyCount() {
   }
 }
 
+export function setJourneys(journeys) {
+ return {
+    type: 'SET_JOURNEYS',
+    journeys
+  }
+}
+
 // ----- SET USER REDUCER INITIAL STATE ------ //
 const userInitialState = {
   userID: '',
@@ -88,6 +95,7 @@ const userInitialState = {
   error: '',
   likedMemlys: [],
   dislikedMemlys: [],
+  journeys: [],
   userLocation: {
     lat: '',
     lng: '',
@@ -99,25 +107,28 @@ const userInitialState = {
 export default function userReducer (state = userInitialState, action) {
   switch(action.type){
    
-   case 'USER_AUTH' :  
-    return {
-      ...state, 
-      isLoggedIn: true,
+    case 'USER_AUTH' :  {
+      return {
+        ...state, 
+        isLoggedIn: true,
+      }
     }
 
-    case 'USER_UNAUTH' : 
+    case 'USER_UNAUTH' : {
       return {
         ...state,
         isLoggedIn: false,
         user: {},
         userID: '',
       }
+    }
 
-    case 'TOGGLE_LOGIN' : 
+    case 'TOGGLE_LOGIN' : {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
       }
+    }
 
     case 'FETCHING_USER_INFO' : {
       return {
@@ -143,7 +154,7 @@ export default function userReducer (state = userInitialState, action) {
           error: '',
         }
       } else {
-        if(action.userID = state.userID){
+        if(action.userID = state.userID) {
           return {
             ...state, 
             isFetching: false, 
@@ -199,12 +210,19 @@ export default function userReducer (state = userInitialState, action) {
     case 'INCREASE_MEMLY_COUNT' : {
       return {
         ...state,
-        memlyCount: state.memlyCount ++
+        memlyCount: action.memlyCount ++
       }
     }
 
-    default : 
+    case 'SET_JOURNEYS' : {
+      return {
+        ...state,
+        journeys: action.journeys
+      }
+    }
+  
+    default : {
       return state
-
     }
   }
+};
