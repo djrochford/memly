@@ -9,7 +9,7 @@ const Profile = (props) => {
   var aboutMe;
   if (props.userFacebook.bio) {
     aboutMe =           <Row className ="show-grid profileRow">
-            <span><b>About me:</b> {props.userFacebook.bio}</span>
+            <span><b>About Dani!!!:</b> {props.userFacebook.bio}</span>
           </Row>;
   } else {
     aboutMe = undefined;
@@ -56,7 +56,7 @@ const Profile = (props) => {
             <span><b>Email:</b> {props.userFacebook.email}</span>
           </Row>
           <Row className ="show-grid profileRow">
-            <span><b>Birthday:</b> {props.userFacebook.birthday}</span>
+            <span><b>Age is just a number:</b> {props.userFacebook.birthday}</span>
           </Row>
           {aboutMe}
           <Row className ="show-grid profileRow">

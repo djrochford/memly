@@ -8,6 +8,7 @@ import ProfileContainer from './components/user/profile/ProfileContainer'
 import EditProfileContainer from './components/user/editProfile/EditProfileContainer';
 import ImageUploadContainer from './components/media/upload/ImageUploadContainer'
 import GoogleMapContainer from './components/map/map/container';
+import SelectionContainer from './components/createStory/selection/container'
 import axios from 'axios'
 
 var routes = (
@@ -18,9 +19,9 @@ var routes = (
       <Route path='/user/profile' component={ProfileContainer}>
         <IndexRoute component={MyMemlysContainer} />
         <Route path='/likedmemlys' component={LikedMemlysContainer} />
-        <Route path='/edit' component={EditProfileContainer} />
       </Route>
       <Route path='/photo' component={ImageUploadContainer}/>
+      <Route path='/selection' component={SelectionContainer} />
     </Route>
   </Router>
 )

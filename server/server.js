@@ -90,7 +90,7 @@ app.get('/isloggedin', helper.isLoggedIn, function(req,res){
 
 //not for facbeook auth.. this is for profile button?
 app.get('/user/profile/', helper.isLoggedIn, function(req, res) {
-  //console.log('am i hitting my get user profile');
+  console.log('am i hitting my get user profile');
   res.redirect('http://localhost:3000/#/user/profile/');
   // }
 });
@@ -98,7 +98,7 @@ app.get('/user/profile/', helper.isLoggedIn, function(req, res) {
 
 //function to pass information from database to client
 app.get('/user/retrieve/profileinfo/', helper.isLoggedIn, function(req, res) {
-
+  console.log('in server user retrieve endpoints')
   if (req.session.passport.user) {
     var userID = req.session.passport.user['_id'];
     //console.log('checking to make sure this is the right ID', userID);
