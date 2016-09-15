@@ -31,6 +31,8 @@ class TitleContainer extends Component {
     axios.post('/user/journey', this.response)
     .then(function(res) {
       console.log('this is the server response', res)
+      const path = '/user/profile';
+      hashHistory.push(path)
     })
     
   }

@@ -32009,6 +32009,18 @@
 	            ' ',
 	            props.memlyCount
 	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          { className: 'show-grid profileRow' },
+	          _react2.default.createElement(
+	            'button',
+	            { size: '30', onClick: function onClick(e) {
+	                var path = '/selection';
+	                _reactRouter.hashHistory.push(path);
+	              } },
+	            'Make New Journey'
+	          )
 	        )
 	      )
 	    ),
@@ -63033,6 +63045,8 @@
 	      console.log('in submit', this.response);
 	      _axios2.default.post('/user/journey', this.response).then(function (res) {
 	        console.log('this is the server response', res);
+	        var path = '/user/profile';
+	        _reactRouter.hashHistory.push(path);
 	      });
 	    }
 	  }, {

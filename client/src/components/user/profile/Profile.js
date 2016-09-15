@@ -62,6 +62,13 @@ const Profile = (props) => {
           <Row className ="show-grid profileRow">
             <span><b>Memlys Made:</b> {props.memlyCount}</span>
           </Row>
+          <Row className ="show-grid profileRow">
+            <button size="30" onClick={e=> {
+              const path = '/selection';
+              hashHistory.push(path); }
+            }>Make New Journey</button>
+          </Row>
+          
         </Col>
     </Row>
 
