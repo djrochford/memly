@@ -23,7 +23,7 @@ const SelectionPresentation = (props) => {
 
   return (
 
-    <div className = "oneMemly" style = {divStyle} data-url = {props.url} data-selected = "false" onClick= {e => props.select(e)}>
+    <div className = "oneMemly" style = {divStyle} data-url = {props.url} data-selected = "false" onClick= {e => props.select(e)}>1
       <div className="oneMemlyWrapper">
       </div>
     </div>

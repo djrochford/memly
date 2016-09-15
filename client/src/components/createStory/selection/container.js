@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react'
+import { Router, Route, hashHistory, IndexRoute, Link } from 'react-router'
 import shallowCompare from 'react-addons-shallow-compare'
 import controllable from 'react-controllables' //need to look into use for this... allows you to control prop types somehow...
 import GoogleMap from 'google-map-react'
@@ -36,7 +37,12 @@ class SelectionContainer extends Component {
 
 // }
 
+  componentWillMount() {
+    this._refs = {};
+  }
+
   componentDidMount() {
+    this.button.disabled = true;
     // console.log('===================getState', store.getState());
     axios.get('/user/retrieve/profileinfo/').then(response => {
       var list = [];
@@ -65,38 +71,64 @@ class SelectionContainer extends Component {
           order: this.currOrder,
           imgUrl: url
         }
+        console.log('child', e.target.children)
+        e.target.childNodes[0].nodeValue = 'dani';
+        console.log('----------------button', this.button)
+        this.button.disabled = false;
         this.currOrder++;
         this.pages.push(page);
-        console.log('pages', this.pages)
         e.target.setAttribute('data-selected', 'true');
-
+        // console.log(this.button)
       } else {
         e.target.style.opacity = '1';
         var removeIndex = -1;
         this.pages.forEach(page => {
           if(page.imgUrl === url) {
             removeIndex = this.pages.indexOf(page);
-            console.log('this pages', this.pages)
           }
         })
         this.pages.splice(removeIndex, 1);
 
         e.target.setAttribute('data-selected', 'false');
         this.currOrder--;
-        // console.log('in decrement', index)
         for (var i = 0; i < this.pages.length; i++) {
-          // console.log('order', this.pages[i].order, i,  index)
           this.pages[i].order = i;
         }
-        console.log(this.pages)
+        console.log('length', this.pages.length)
+        if (this.pages.length === 0) {
+          this.button.disabled = true;
+        }
+
+
+      // <button type="submit" id="submit" value="submit" disabled ref={(c) => this.button = c} onClick={this.submit.bind(this)}><Link to="addcaptions" disabled>Submit</Link></button>
+      // <Link to="addcaptions" className="editProfileButton" role="button" ref={(c) =>  this._refs['submit'] = c} id="disabledCursor" onClick={ (e) => e.preventDefault() }>Submit</Link>
+// <Link to="/addcaptions" id="disabledCursor" >Submit</Link>
       }
+  }
+
+  submit(e) {
+    console.log('in submit')
+    if(this.pages.length) {
+      const path = '/addcaptions'
+      console.log(path, hashHistory)
+      hashHistory.push(path)
+      console.log(path, hashHistory)
       
+    }
+
+            // <li><Link to="/">Home</Link></li>
+      // <Link to="/photo">Upload</Link>
+
+    // var transitionTo = Router.transitionTo;
+    // this.pages.length > 0 && transitionTo('addcaptions');
   }
 
   render() {
 
     return(
       <div className = "ProfileBoxes">
+       <button type="submit" id="submit" value="submit" onClick={this.submit.bind(this)} ref={(c) => this.button = c} >Submit</button>
+
         <div className ="MemlysContainer">
           {this.props.memlys && this.props.memlys.map((url) => <SelectionPresentation url={url} select={this.select.bind(this)} />)}
         </div>

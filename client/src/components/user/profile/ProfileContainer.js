@@ -68,7 +68,7 @@ class ProfileContainer extends React.Component {
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
     console.log(this.props, 'profileComponentWillMount');
     // var context = this;
     this.props.dispatch(userActions.userAuth());
@@ -101,10 +101,10 @@ class ProfileContainer extends React.Component {
   }
 
 
-  componentDidMount(){
-    console.log(this.props, 'profileComponentDidMount'); 
-    // props.isLoggedIn should be TRUE...
-  }
+  // componentDidMount(){
+  //   console.log(this.props, 'profileComponentDidMount'); 
+  //   // props.isLoggedIn should be TRUE...
+  // }
 
   componentWillReceiveProps(props, next) {
     console.log(props, next, 'ProfileContainer componentWillReceiveProps')

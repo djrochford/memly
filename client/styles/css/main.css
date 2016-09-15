@@ -677,7 +677,11 @@ ul {
   background-color: #f6f6f6;
   box-shadow: 0 0px 4px rgba(120, 120, 120, 0.6); }
 
-.oneMemly .selected {
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
+
+
+#disabledCursor { 
+  cursor: default; 
+  pointer-events: auto;
+background-color: #e7e7e7; 
+color: black;
 }

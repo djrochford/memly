@@ -31741,8 +31741,8 @@
 	      return dateFormatted;
 	    }
 	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
 	      var _this2 = this;
 
 	      console.log(this.props, 'profileComponentWillMount');
@@ -31774,12 +31774,12 @@
 	      // });
 	      // this.props.changeNavToAlreadyLoggedIn();
 	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      console.log(this.props, 'profileComponentDidMount');
-	      // props.isLoggedIn should be TRUE...
-	    }
+
+	    // componentDidMount(){
+	    //   console.log(this.props, 'profileComponentDidMount'); 
+	    //   // props.isLoggedIn should be TRUE...
+	    // }
+
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(props, next) {
@@ -62418,6 +62418,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(174);
+
 	var _reactAddonsShallowCompare = __webpack_require__(561);
 
 	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
@@ -62493,8 +62495,14 @@
 	  // }
 
 	  _createClass(SelectionContainer, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this._refs = {};
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      this.button.disabled = true;
 	      // console.log('===================getState', store.getState());
 	      _axios2.default.get('/user/retrieve/profileinfo/').then(function (response) {
 	        var list = [];
@@ -62527,30 +62535,55 @@
 	          order: this.currOrder,
 	          imgUrl: url
 	        };
+	        console.log('child', e.target.children);
+	        e.target.childNodes[0].nodeValue = 'dani';
+	        console.log('----------------button', this.button);
+	        this.button.disabled = false;
 	        this.currOrder++;
 	        this.pages.push(page);
-	        console.log('pages', this.pages);
 	        e.target.setAttribute('data-selected', 'true');
+	        // console.log(this.button)
 	      } else {
 	        e.target.style.opacity = '1';
 	        var removeIndex = -1;
 	        this.pages.forEach(function (page) {
 	          if (page.imgUrl === url) {
 	            removeIndex = _this2.pages.indexOf(page);
-	            console.log('this pages', _this2.pages);
 	          }
 	        });
 	        this.pages.splice(removeIndex, 1);
 
 	        e.target.setAttribute('data-selected', 'false');
 	        this.currOrder--;
-	        // console.log('in decrement', index)
 	        for (var i = 0; i < this.pages.length; i++) {
-	          // console.log('order', this.pages[i].order, i,  index)
 	          this.pages[i].order = i;
 	        }
-	        console.log(this.pages);
+	        console.log('length', this.pages.length);
+	        if (this.pages.length === 0) {
+	          this.button.disabled = true;
+	        }
+
+	        // <button type="submit" id="submit" value="submit" disabled ref={(c) => this.button = c} onClick={this.submit.bind(this)}><Link to="addcaptions" disabled>Submit</Link></button>
+	        // <Link to="addcaptions" className="editProfileButton" role="button" ref={(c) =>  this._refs['submit'] = c} id="disabledCursor" onClick={ (e) => e.preventDefault() }>Submit</Link>
+	        // <Link to="/addcaptions" id="disabledCursor" >Submit</Link>
 	      }
+	    }
+	  }, {
+	    key: 'submit',
+	    value: function submit(e) {
+	      console.log('in submit');
+	      if (this.pages.length) {
+	        var path = '/addcaptions';
+	        console.log(path, _reactRouter.hashHistory);
+	        _reactRouter.hashHistory.push(path);
+	        console.log(path, _reactRouter.hashHistory);
+	      }
+
+	      // <li><Link to="/">Home</Link></li>
+	      // <Link to="/photo">Upload</Link>
+
+	      // var transitionTo = Router.transitionTo;
+	      // this.pages.length > 0 && transitionTo('addcaptions');
 	    }
 	  }, {
 	    key: 'render',
@@ -62560,6 +62593,13 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'ProfileBoxes' },
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit', id: 'submit', value: 'submit', onClick: this.submit.bind(this), ref: function ref(c) {
+	              return _this3.button = c;
+	            } },
+	          'Submit'
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'MemlysContainer' },
@@ -62635,6 +62675,7 @@
 	    { className: 'oneMemly', style: divStyle, 'data-url': props.url, 'data-selected': 'false', onClick: function onClick(e) {
 	        return props.select(e);
 	      } },
+	    '1',
 	    _react2.default.createElement('div', { className: 'oneMemlyWrapper' })
 	  );
 	};
