@@ -94,6 +94,8 @@ const userInitialState = {
     lng: '',
   },
   birthday: '',
+  allMemlys: [],
+  selection: []
 }
 
 // ------------ USER REDUCER -----------------//
@@ -106,6 +108,13 @@ export default function userReducer (state = userInitialState, action) {
        allMemlys: action.memlys
      }
    }
+
+  case 'SELECTED_MEMLYS' : {
+    return {
+      ...state, 
+      selection: action.selection
+    }
+  }
 
    case 'USER_AUTH' :  
     return {

@@ -8,7 +8,11 @@ import ProfileContainer from './components/user/profile/ProfileContainer'
 import EditProfileContainer from './components/user/editProfile/EditProfileContainer';
 import ImageUploadContainer from './components/media/upload/ImageUploadContainer'
 import GoogleMapContainer from './components/map/map/container';
-import SelectionContainer from './components/createStory/selection/container'
+import SelectionContainer from './components/createStory/selection/container';
+import CaptionContainer from './components/createStory/addCaption/container'
+import TitleContainer from './components/createStory/addTitle/container'
+import Title2Container from './components/createStory/addTitle/titleContainer'
+
 import axios from 'axios'
 
 var routes = (
@@ -22,6 +26,10 @@ var routes = (
       </Route>
       <Route path='/photo' component={ImageUploadContainer}/>
       <Route path='/selection' component={SelectionContainer} />
+      <Route path='/addcaptions' component={CaptionContainer} />
+      <Route component={TitleContainer}>
+        <Route path='/addtitle' component={Title2Container} />
+      </Route>
     </Route>
   </Router>
 )

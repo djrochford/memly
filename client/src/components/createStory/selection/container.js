@@ -37,9 +37,9 @@ class SelectionContainer extends Component {
 
 // }
 
-  componentWillMount() {
-    this._refs = {};
-  }
+  // componentWillMount() {
+  //   this._refs = {};
+  // }
 
   componentDidMount() {
     this.button.disabled = true;
@@ -51,7 +51,7 @@ class SelectionContainer extends Component {
       list = list.concat(urlsLikedMemlys);
       list = list.concat(response.data.memlys);
       console.log('response===========================', list)
-      store.dispatch({
+      this.props.dispatch({
         type: 'USER_LIST_MEMLYS',
         memlys: list
       });
@@ -75,6 +75,7 @@ class SelectionContainer extends Component {
         e.target.childNodes[0].nodeValue = 'dani';
         console.log('----------------button', this.button)
         this.button.disabled = false;
+        this.button.style.backgroundColor = 'lightGreen';
         this.currOrder++;
         this.pages.push(page);
         e.target.setAttribute('data-selected', 'true');
@@ -97,6 +98,7 @@ class SelectionContainer extends Component {
         console.log('length', this.pages.length)
         if (this.pages.length === 0) {
           this.button.disabled = true;
+          this.button.style.backgroundColor = 'initial';
         }
 
 
@@ -108,13 +110,15 @@ class SelectionContainer extends Component {
 
   submit(e) {
     console.log('in submit')
-    if(this.pages.length) {
+    // if(this.pages.length) {
+      this.props.dispatch({
+        type: 'SELECTED_MEMLYS', 
+        selection: this.pages
+      })
       const path = '/addcaptions'
-      console.log(path, hashHistory)
       hashHistory.push(path)
-      console.log(path, hashHistory)
       
-    }
+    // }
 
             // <li><Link to="/">Home</Link></li>
       // <Link to="/photo">Upload</Link>
@@ -127,7 +131,7 @@ class SelectionContainer extends Component {
 
     return(
       <div className = "ProfileBoxes">
-       <button type="submit" id="submit" value="submit" onClick={this.submit.bind(this)} ref={(c) => this.button = c} >Submit</button>
+       <button type="submit" id="submit" className = "editProfileButton'" value="submit" onClick={this.submit.bind(this)} ref={(c) => this.button = c} >Submit</button>
 
         <div className ="MemlysContainer">
           {this.props.memlys && this.props.memlys.map((url) => <SelectionPresentation url={url} select={this.select.bind(this)} />)}

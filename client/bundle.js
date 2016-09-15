@@ -21567,12 +21567,25 @@
 
 	var _container4 = _interopRequireDefault(_container3);
 
+	var _container5 = __webpack_require__(647);
+
+	var _container6 = _interopRequireDefault(_container5);
+
+	var _container7 = __webpack_require__(649);
+
+	var _container8 = _interopRequireDefault(_container7);
+
+	var _titleContainer = __webpack_require__(651);
+
+	var _titleContainer2 = _interopRequireDefault(_titleContainer);
+
 	var _axios = __webpack_require__(241);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	//File contains the route setup to be exported to be used by App.js
 	var routes = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
@@ -21588,13 +21601,18 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: '/likedmemlys', component: _LikedMemlysContainer2.default })
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/photo', component: _ImageUploadContainer2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/selection', component: _container4.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/selection', component: _container4.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/addcaptions', component: _container6.default }),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { component: _container8.default },
+	      _react2.default.createElement(_reactRouter.Route, { path: '/addtitle', component: _titleContainer2.default })
+	    )
 	  )
 	);
 
 	// you can use an onEnter hook before entering routes to check if user is authorized. (i.e. can check the state logged in or not)
 	// this is a good way to do client side route protection. Without this, although they may not be able to see any of their data, anyone can still enter /user/profile route
-	//File contains the route setup to be exported to be used by App.js
 	function checkAuth(nextState, replace, callback) {
 	  //the fact that we have been rerouted by server to here means that we are authorized to be here
 	  //but what if someone manually enters.. 'https:localhost:3000/user/profile'?
@@ -31104,7 +31122,9 @@
 	    lat: '',
 	    lng: ''
 	  },
-	  birthday: ''
+	  birthday: '',
+	  allMemlys: [],
+	  selection: []
 	};
 
 	// ------------ USER REDUCER -----------------//
@@ -31118,6 +31138,13 @@
 	      {
 	        return _extends({}, state, {
 	          allMemlys: action.memlys
+	        });
+	      }
+
+	    case 'SELECTED_MEMLYS':
+	      {
+	        return _extends({}, state, {
+	          selection: action.selection
 	        });
 	      }
 
@@ -62494,14 +62521,15 @@
 
 	  // }
 
+	  // componentWillMount() {
+	  //   this._refs = {};
+	  // }
+
 	  _createClass(SelectionContainer, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this._refs = {};
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var _this2 = this;
+
 	      this.button.disabled = true;
 	      // console.log('===================getState', store.getState());
 	      _axios2.default.get('/user/retrieve/profileinfo/').then(function (response) {
@@ -62513,7 +62541,7 @@
 	        list = list.concat(urlsLikedMemlys);
 	        list = list.concat(response.data.memlys);
 	        console.log('response===========================', list);
-	        _App2.default.dispatch({
+	        _this2.props.dispatch({
 	          type: 'USER_LIST_MEMLYS',
 	          memlys: list
 	        });
@@ -62522,7 +62550,7 @@
 	  }, {
 	    key: 'select',
 	    value: function select(e) {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      // console.log('in select event', e.target.getAttribute('data-url');
 	      var url = e.target.getAttribute('data-url');
@@ -62539,6 +62567,7 @@
 	        e.target.childNodes[0].nodeValue = 'dani';
 	        console.log('----------------button', this.button);
 	        this.button.disabled = false;
+	        this.button.style.backgroundColor = 'lightGreen';
 	        this.currOrder++;
 	        this.pages.push(page);
 	        e.target.setAttribute('data-selected', 'true');
@@ -62548,7 +62577,7 @@
 	        var removeIndex = -1;
 	        this.pages.forEach(function (page) {
 	          if (page.imgUrl === url) {
-	            removeIndex = _this2.pages.indexOf(page);
+	            removeIndex = _this3.pages.indexOf(page);
 	          }
 	        });
 	        this.pages.splice(removeIndex, 1);
@@ -62561,6 +62590,7 @@
 	        console.log('length', this.pages.length);
 	        if (this.pages.length === 0) {
 	          this.button.disabled = true;
+	          this.button.style.backgroundColor = 'initial';
 	        }
 
 	        // <button type="submit" id="submit" value="submit" disabled ref={(c) => this.button = c} onClick={this.submit.bind(this)}><Link to="addcaptions" disabled>Submit</Link></button>
@@ -62572,12 +62602,15 @@
 	    key: 'submit',
 	    value: function submit(e) {
 	      console.log('in submit');
-	      if (this.pages.length) {
-	        var path = '/addcaptions';
-	        console.log(path, _reactRouter.hashHistory);
-	        _reactRouter.hashHistory.push(path);
-	        console.log(path, _reactRouter.hashHistory);
-	      }
+	      // if(this.pages.length) {
+	      this.props.dispatch({
+	        type: 'SELECTED_MEMLYS',
+	        selection: this.pages
+	      });
+	      var path = '/addcaptions';
+	      _reactRouter.hashHistory.push(path);
+
+	      // }
 
 	      // <li><Link to="/">Home</Link></li>
 	      // <Link to="/photo">Upload</Link>
@@ -62588,15 +62621,15 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'ProfileBoxes' },
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'submit', id: 'submit', value: 'submit', onClick: this.submit.bind(this), ref: function ref(c) {
-	              return _this3.button = c;
+	          { type: 'submit', id: 'submit', className: 'editProfileButton\'', value: 'submit', onClick: this.submit.bind(this), ref: function ref(c) {
+	              return _this4.button = c;
 	            } },
 	          'Submit'
 	        ),
@@ -62604,7 +62637,7 @@
 	          'div',
 	          { className: 'MemlysContainer' },
 	          this.props.memlys && this.props.memlys.map(function (url) {
-	            return _react2.default.createElement(_presentation2.default, { url: url, select: _this3.select.bind(_this3) });
+	            return _react2.default.createElement(_presentation2.default, { url: url, select: _this4.select.bind(_this4) });
 	          })
 	        )
 	      );
@@ -62681,6 +62714,598 @@
 	};
 
 	exports.default = SelectionPresentation;
+
+/***/ },
+/* 647 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(174);
+
+	var _reactAddonsShallowCompare = __webpack_require__(561);
+
+	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
+
+	var _reactControllables = __webpack_require__(563);
+
+	var _reactControllables2 = _interopRequireDefault(_reactControllables);
+
+	var _googleMapReact = __webpack_require__(609);
+
+	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
+
+	var _reactAddonsUpdate = __webpack_require__(641);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	var _axios = __webpack_require__(241);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRedux = __webpack_require__(263);
+
+	var _App = __webpack_require__(1);
+
+	var _App2 = _interopRequireDefault(_App);
+
+	var _presentation = __webpack_require__(648);
+
+	var _presentation2 = _interopRequireDefault(_presentation);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //need to look into use for this... allows you to control prop types somehow...
+
+	// import store from '...../App.js'
+
+
+	// import * as mapActions from '../../../redux/mapReducer'
+	// import * as userActions from '../../../redux/userReducer'
+
+	var CaptionContainer = function (_Component) {
+	  _inherits(CaptionContainer, _Component);
+
+	  function CaptionContainer(props) {
+	    _classCallCheck(this, CaptionContainer);
+
+	    return _possibleConstructorReturn(this, (CaptionContainer.__proto__ || Object.getPrototypeOf(CaptionContainer)).call(this, props));
+	  }
+
+	  //   {
+	  //   storyTitle: String,
+	  //   pages: [
+	  //     {
+	  //       order: Number,
+	  //       imgUrl: String,
+	  //       caption: String
+	  //     },
+	  //     {
+	  //       order: Number,
+	  //       imgUrl: String,
+	  //       caption: String
+	  //     }
+	  //   ]
+
+	  // }
+
+	  // componentWillMount() {
+	  //   this._refs = {};
+	  // }
+
+	  _createClass(CaptionContainer, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var dani = this.props.selection;
+	      console.log('userReducer', dani);
+	    }
+	  }, {
+	    key: 'select',
+	    value: function select(e) {}
+	  }, {
+	    key: 'submit',
+	    value: function submit(e) {
+	      console.log('in submit');
+	      this.props.dispatch({
+	        type: 'SELECTED_MEMLYS',
+	        selection: this.props.selection
+	      });
+	      var path = '/addtitle';
+	      _reactRouter.hashHistory.push(path);
+	    }
+	  }, {
+	    key: 'addCaption',
+	    value: function addCaption(e, url, order) {
+	      var page = this.props.selection[order];
+	      page.caption = e.target.value;
+
+	      console.log('eeee', page, this.props.selection);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ProfileBoxes' },
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit', id: 'submit', className: 'editProfileButton\'', value: 'submit', onClick: this.submit.bind(this), ref: function ref(c) {
+	              return _this2.button = c;
+	            } },
+	          'Submit'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'MemlysContainer' },
+	          this.props.selection && this.props.selection.map(function (page) {
+	            return _react2.default.createElement(_presentation2.default, { url: page.imgUrl, order: page.order, addCaption: _this2.addCaption.bind(_this2) });
+	          })
+	        )
+	      );
+	    }
+
+	    // render() {
+	    //   return <SelectionPresentation memlys={this.props.memlys} />
+	    // }
+
+	  }]);
+
+	  return CaptionContainer;
+	}(_react.Component);
+
+	function mapStateToProps(state) {
+	  console.log('state----------------------', state.userReducer);
+	  return {
+	    //   currentUserLocation: state.mapReducer.currentUserLocation,
+	    selection: state.userReducer.selection
+	    //   memlyIdStorage: state.memlysReducer.memlyIdStorage,
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(CaptionContainer);
+
+/***/ },
+/* 648 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _googleMapReact = __webpack_require__(609);
+
+	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var CaptionPresentation = function CaptionPresentation(props) {
+	  var divStyle = {
+	    backgroundImage: 'url(' + props.url + ')',
+	    backgroundSize: 'cover',
+	    backgroundPosition: 'center',
+	    backgroundRepeat: 'no-repeat'
+	  };
+
+	  var capStyle = {
+	    backgroundSize: 'cover',
+	    backgroundPosition: 'center',
+	    backgroundRepeat: 'no-repeat'
+	  };
+	  // return(
+	  //   <div className = "oneMemly" style={divStyle}>
+	  //   <div className="oneMemlyWrapper">
+	  //   </div>
+	  //   </div>
+	  //   )
+
+	  // heyyy{console.log('props', props.memlys)} 
+	  // <img src={props.memlys.map(memly=>memly.media.url)} />
+	  // <img src=memly.media.url />
+	  // {props.memlys.map(memly => memly.media.url)}
+
+
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'oneMemly', style: divStyle, 'data-url': props.url },
+	      _react2.default.createElement('div', { className: 'oneMemlyWrapper' })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'oneMemly', style: capStyle },
+	      'Caption: ',
+	      _react2.default.createElement('input', { onChange: function onChange(e) {
+	          return props.addCaption(e, props.url, props.order);
+	        }, size: '60', maxlength: '140', width: '48', height: '48' })
+	    )
+	  );
+	};
+
+	exports.default = CaptionPresentation;
+
+/***/ },
+/* 649 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(174);
+
+	var _reactAddonsShallowCompare = __webpack_require__(561);
+
+	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
+
+	var _reactControllables = __webpack_require__(563);
+
+	var _reactControllables2 = _interopRequireDefault(_reactControllables);
+
+	var _googleMapReact = __webpack_require__(609);
+
+	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
+
+	var _reactAddonsUpdate = __webpack_require__(641);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	var _axios = __webpack_require__(241);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRedux = __webpack_require__(263);
+
+	var _App = __webpack_require__(1);
+
+	var _App2 = _interopRequireDefault(_App);
+
+	var _presentation = __webpack_require__(650);
+
+	var _presentation2 = _interopRequireDefault(_presentation);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //need to look into use for this... allows you to control prop types somehow...
+
+	// import store from '...../App.js'
+
+
+	// import * as mapActions from '../../../redux/mapReducer'
+	// import * as userActions from '../../../redux/userReducer'
+
+	var TitleContainer = function (_Component) {
+	  _inherits(TitleContainer, _Component);
+
+	  function TitleContainer(props) {
+	    _classCallCheck(this, TitleContainer);
+
+	    return _possibleConstructorReturn(this, (TitleContainer.__proto__ || Object.getPrototypeOf(TitleContainer)).call(this, props));
+	  }
+
+	  _createClass(TitleContainer, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var dani = this.props.selection;
+	      console.log('userReducer', dani);
+	    }
+	  }, {
+	    key: 'select',
+	    value: function select(e) {}
+	  }, {
+	    key: 'submit',
+	    value: function submit(e) {
+	      console.log('in submit', this.response);
+	      _axios2.default.post('/user/journey', this.response).then(function (res) {
+	        console.log('this is the server response', res);
+	      });
+	    }
+	  }, {
+	    key: 'addTitle',
+	    value: function addTitle(e) {
+
+	      var title = e.target.value;
+	      this.response = {
+	        journeyTitle: title,
+	        pages: this.props.selection
+	      };
+	      console.log('eeee', response);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ProfileBoxes' },
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit', id: 'submit', className: 'editProfileButton\'', value: 'submit', onClick: this.submit.bind(this), ref: function ref(c) {
+	              return _this2.button = c;
+	            } },
+	          'Submit'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            'Title: '
+	          ),
+	          _react2.default.createElement('input', { size: '100', onChange: function onChange(e) {
+	              return _this2.addTitle(e);
+	            } })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'MemlysContainer' },
+	          this.props.children
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TitleContainer;
+	}(_react.Component);
+
+	function mapStateToProps(state) {
+	  console.log('state----------------------', state.userReducer);
+	  return {
+	    //   currentUserLocation: state.mapReducer.currentUserLocation,
+	    selection: state.userReducer.selection
+	    //   memlyIdStorage: state.memlysReducer.memlyIdStorage,
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(TitleContainer);
+
+/***/ },
+/* 650 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _googleMapReact = __webpack_require__(609);
+
+	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TitlePresentation = function TitlePresentation(props) {
+	  var divStyle = {
+	    backgroundImage: 'url(' + props.url + ')',
+	    backgroundSize: 'cover',
+	    backgroundPosition: 'center',
+	    backgroundRepeat: 'no-repeat'
+	  };
+
+	  var capStyle = {
+	    backgroundSize: 'cover',
+	    backgroundPosition: 'center',
+	    backgroundRepeat: 'no-repeat'
+	  };
+	  // return(
+	  //   <div className = "oneMemly" style={divStyle}>
+	  //   <div className="oneMemlyWrapper">
+	  //   </div>
+	  //   </div>
+	  //   )
+
+	  // heyyy{console.log('props', props.memlys)} 
+	  // <img src={props.memlys.map(memly=>memly.media.url)} />
+	  // <img src=memly.media.url />
+	  // {props.memlys.map(memly => memly.media.url)}
+
+
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'oneMemly', style: divStyle, 'data-url': props.url },
+	      _react2.default.createElement('div', { className: 'oneMemlyWrapper' })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { style: capStyle },
+	      'Caption: ',
+	      props.caption
+	    )
+	  );
+	};
+
+	exports.default = TitlePresentation;
+
+/***/ },
+/* 651 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(174);
+
+	var _reactAddonsShallowCompare = __webpack_require__(561);
+
+	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
+
+	var _reactControllables = __webpack_require__(563);
+
+	var _reactControllables2 = _interopRequireDefault(_reactControllables);
+
+	var _googleMapReact = __webpack_require__(609);
+
+	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
+
+	var _reactAddonsUpdate = __webpack_require__(641);
+
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+
+	var _axios = __webpack_require__(241);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRedux = __webpack_require__(263);
+
+	var _App = __webpack_require__(1);
+
+	var _App2 = _interopRequireDefault(_App);
+
+	var _presentation = __webpack_require__(650);
+
+	var _presentation2 = _interopRequireDefault(_presentation);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //need to look into use for this... allows you to control prop types somehow...
+
+	// import store from '...../App.js'
+
+
+	// import * as mapActions from '../../../redux/mapReducer'
+	// import * as userActions from '../../../redux/userReducer'
+
+	var Title2Container = function (_Component) {
+	  _inherits(Title2Container, _Component);
+
+	  function Title2Container(props) {
+	    _classCallCheck(this, Title2Container);
+
+	    return _possibleConstructorReturn(this, (Title2Container.__proto__ || Object.getPrototypeOf(Title2Container)).call(this, props));
+	  }
+
+	  //   {
+	  //   storyTitle: String,
+	  //   pages: [
+	  //     {
+	  //       order: Number,
+	  //       imgUrl: String,
+	  //       caption: String
+	  //     },
+	  //     {
+	  //       order: Number,
+	  //       imgUrl: String,
+	  //       caption: String
+	  //     }
+	  //   ]
+
+	  // }
+
+	  // componentWillMount() {
+	  //   this._refs = {};
+	  // }
+
+	  _createClass(Title2Container, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var dani = this.props.selection;
+	      console.log('userReducer', dani);
+	    }
+	  }, {
+	    key: 'select',
+	    value: function select(e) {}
+	  }, {
+	    key: 'submit',
+	    value: function submit(e) {
+	      console.log('in submit');
+	      this.props.dispatch({
+	        type: 'SELECTED_MEMLYS',
+	        selection: this.props.selection
+	      });
+	    }
+	  }, {
+	    key: 'addCaption',
+	    value: function addCaption(e, url, order) {
+	      var page = this.props.selection[order];
+	      page.caption = e.target.value;
+
+	      console.log('eeee', page, this.props.selection);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.selection && this.props.selection.map(function (page) {
+	          return _react2.default.createElement(_presentation2.default, { url: page.imgUrl, order: page.order, caption: page.caption });
+	        })
+	      );
+	    }
+	  }]);
+
+	  return Title2Container;
+	}(_react.Component);
+
+	function mapStateToProps(state) {
+	  console.log('state----------------------', state.userReducer);
+	  return {
+	    //   currentUserLocation: state.mapReducer.currentUserLocation,
+	    selection: state.userReducer.selection
+	    //   memlyIdStorage: state.memlysReducer.memlyIdStorage,
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Title2Container);
 
 /***/ }
 /******/ ]);
