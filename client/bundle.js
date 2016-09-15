@@ -59402,7 +59402,7 @@
 
 	var userActions = _interopRequireWildcard(_userReducer);
 
-	var _myJourneys = __webpack_require__(624);
+	var _myJourneys = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./myJourneys.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _myJourneys2 = _interopRequireDefault(_myJourneys);
 
@@ -59467,42 +59467,6 @@
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(MyJourneysContainer);
-
-/***/ },
-/* 624 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(174);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var MyJourneys = function MyJourneys(props) {
-
-	  var divStyle = {
-	    backgroundImage: 'url(' + props.journey.pages[0].imgUrl + ')',
-	    backgroundPosition: 'center',
-	    backgroundSize: 'cover',
-	    backgroundRepeat: 'no-repeat'
-	  };
-
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'oneMemly', style: divStyle },
-	    _react2.default.createElement('div', { className: 'oneMemlyWrapper' })
-	  );
-	};
-
-	exports.default = MyJourneys;
 
 /***/ }
 /******/ ]);
