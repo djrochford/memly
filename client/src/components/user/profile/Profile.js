@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Route, hashHistory, IndexRoute, Link } from 'react-router'
 import {Grid, Row, Col, Nav, NavItem} from 'react-bootstrap'
-
+import JourneyPlayerContainer from '../journeyPlayer/journeyPlayerContainer.js'
 
 
 const Profile = (props) => {
@@ -44,6 +44,9 @@ const Profile = (props) => {
   return (
 
     <Grid>
+      <Row className="show-grid" id="player-container">
+        <JourneyPlayerContainer/>
+      </Row>
       <Row className = "show-grid" id ="userProfileContainer">
         <div>
           <Col sm={4}><img id = "profilePhoto" src={props.userFacebook.profilePhotoUrl}/></Col>

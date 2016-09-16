@@ -85,10 +85,10 @@ export function setJourneys(journeys) {
   }
 }
 
-export function pageIndexChange(limit) {
+export function setCurrentJourney(journeyIndex) {
   return {
-    type: 'PAGE_INDEX_CHANGE',
-    limit
+    type: 'SET_CURRENT_JOURNEY',
+    journeyIndex
   }
 }
 
@@ -108,7 +108,8 @@ const userInitialState = {
     lng: '',
   },
   birthday: '',
-  pageIndex: 0
+  pageIndex: 0,
+  currentJourney: {}
 }
 
 // ------------ USER REDUCER -----------------//
@@ -229,17 +230,10 @@ export default function userReducer (state = userInitialState, action) {
       }
     }
 
-    case 'PAGE_INDEX_CHANGE' : {
-      if (state.pageIndex + 1 === action.limit) {
-        return {
-          ...state,
-          pageIndex: 0
-        }
-      } else {
-        return {
-          ...state,
-          pageIndex: state.pageIndex + 1
-        }
+    case 'SET_CURRENT_JOURNEY' : {
+      return {
+        ...state,
+        currentJourney: state.journeys[action.journeyIndex]
       }
     }
   
