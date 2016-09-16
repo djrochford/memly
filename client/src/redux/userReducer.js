@@ -79,6 +79,20 @@ export function increaseMemlyCount() {
   }
 }
 
+export function setJourneys(journeys) {
+ return {
+    type: 'SET_JOURNEYS',
+    journeys
+  }
+}
+
+export function setCurrentJourney(journeyIndex) {
+  return {
+    type: 'SET_CURRENT_JOURNEY',
+    journeyIndex
+  }
+}
+
 // ----- SET USER REDUCER INITIAL STATE ------ //
 const userInitialState = {
   userID: '',
@@ -89,13 +103,16 @@ const userInitialState = {
   error: '',
   likedMemlys: [],
   dislikedMemlys: [],
+  journeys: [],
   userLocation: {
     lat: '',
     lng: '',
   },
   birthday: '',
   allMemlys: [],
-  selection: []
+  selection: [],
+  pageIndex: 0,
+  currentJourney: {},
 }
 
 // ------------ USER REDUCER -----------------//
@@ -120,21 +137,24 @@ export default function userReducer (state = userInitialState, action) {
     return {
       ...state, 
       isLoggedIn: true,
+
     }
 
-    case 'USER_UNAUTH' : 
+    case 'USER_UNAUTH' : {
       return {
         ...state,
         isLoggedIn: false,
         user: {},
         userID: '',
       }
+    }
 
-    case 'TOGGLE_LOGIN' : 
+    case 'TOGGLE_LOGIN' : {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
       }
+    }
 
     case 'FETCHING_USER_INFO' : {
       return {
@@ -160,7 +180,7 @@ export default function userReducer (state = userInitialState, action) {
           error: '',
         }
       } else {
-        if(action.userID = state.userID){
+        if(action.userID = state.userID) {
           return {
             ...state, 
             isFetching: false, 
@@ -216,12 +236,26 @@ export default function userReducer (state = userInitialState, action) {
     case 'INCREASE_MEMLY_COUNT' : {
       return {
         ...state,
-        memlyCount: state.memlyCount ++
+        memlyCount: action.memlyCount ++
       }
     }
 
-    default : 
-      return state
+    case 'SET_JOURNEYS' : {
+      return {
+        ...state,
+        journeys: action.journeys
+      }
+    }
 
+    case 'SET_CURRENT_JOURNEY' : {
+      return {
+        ...state,
+        currentJourney: state.journeys[action.journeyIndex]
+      }
+    }
+  
+    default : {
+      return state
     }
   }
+};

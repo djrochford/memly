@@ -1,19 +1,20 @@
 //File contains the route setup to be exported to be used by App.js
-import React from 'react'
-import { Router, Route, hashHistory, IndexRoute } from 'react-router'
-import HomeContainer from './components/home/HomeContainer'
-import MyMemlysContainer from './components/user/myMemlys/MyMemlysContainer'
-import LikedMemlysContainer from './components/user/likedMemlys/LikedMemlysContainer'
-import ProfileContainer from './components/user/profile/ProfileContainer'
+import React from 'react';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import HomeContainer from './components/home/HomeContainer';
+import MyMemlysContainer from './components/user/myMemlys/MyMemlysContainer';
+import MyJourneysContainer from './components/user/myJourneys/myJourneysContainer';
+import LikedMemlysContainer from './components/user/likedMemlys/LikedMemlysContainer';
+import ProfileContainer from './components/user/profile/ProfileContainer';
 import EditProfileContainer from './components/user/editProfile/EditProfileContainer';
-import ImageUploadContainer from './components/media/upload/ImageUploadContainer'
+import ImageUploadContainer from './components/media/upload/ImageUploadContainer';
 import GoogleMapContainer from './components/map/map/container';
 import SelectionContainer from './components/createJourney/selection/container';
 import CaptionContainer from './components/createJourney/addCaption/container'
 import TitleContainer from './components/createJourney/addTitle/container'
 import Title2Container from './components/createJourney/addTitle/titleContainer'
-
 import axios from 'axios'
+
 
 var routes = (
   <Router history={hashHistory}>
@@ -22,6 +23,7 @@ var routes = (
       <Route path='/logout' component={GoogleMapContainer}/>
       <Route path='/user/profile' component={ProfileContainer}>
         <IndexRoute component={MyMemlysContainer} />
+        <Route path="/journeys" component={MyJourneysContainer} />
         <Route path='/likedmemlys' component={LikedMemlysContainer} />
       </Route>
       <Route path='/photo' component={ImageUploadContainer}/>

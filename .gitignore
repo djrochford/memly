@@ -8,7 +8,9 @@ server/config/config.js
 
 db/auth/keys.js
 
-.DS_Store
+client/bundle.js
+
+*/.DS_Store
 
 db/aws/sample
 db/aws/config/keys.js
