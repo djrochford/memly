@@ -6,6 +6,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var config = require('./config.js');
 var User = require('../users/userModel.js').userModel;
+var cookieParser = require('cookie-parser');
 var env = new config.env();
 console.log(env.FACEBOOK_APP_ID);
 console.log(env.FACEBOOK_APP_SECRET);
