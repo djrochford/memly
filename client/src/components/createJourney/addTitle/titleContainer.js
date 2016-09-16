@@ -6,11 +6,8 @@ import GoogleMap from 'google-map-react'
 import update from 'react-addons-update'
 import axios from 'axios'
 import { connect } from 'react-redux'
-// import store from '...../App.js'
 import store from '../../../App'
 import TitlePresentation from './presentation.js'
-// import * as mapActions from '../../../redux/mapReducer'
-// import * as userActions from '../../../redux/userReducer'
 
 class Title2Container extends Component {
 
@@ -18,33 +15,9 @@ class Title2Container extends Component {
     super(props);
   }
 
-//   {
-//   storyTitle: String,
-//   pages: [
-//     {
-//       order: Number,
-//       imgUrl: String,
-//       caption: String
-//     },
-//     {
-//       order: Number,
-//       imgUrl: String,
-//       caption: String
-//     }
-//   ]
-
-// }
-
-  // componentWillMount() {
-  //   this._refs = {};
-  // }
-
   componentDidMount() {
     var dani = this.props.selection
     console.log('userReducer', dani)
-  }
-
-  select(e) {
   }
 
   submit(e) {
@@ -59,8 +32,6 @@ class Title2Container extends Component {
   addCaption(e, url, order) {
     var page = this.props.selection[order];
     page.caption = e.target.value;
-
-    console.log('eeee', page, this.props.selection)
   }
 
   render() {
@@ -75,11 +46,8 @@ class Title2Container extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state----------------------', state.userReducer)
   return {
-  //   currentUserLocation: state.mapReducer.currentUserLocation,
     selection: state.userReducer.selection
-  //   memlyIdStorage: state.memlysReducer.memlyIdStorage,
   }
 }
 

@@ -14,18 +14,6 @@ const CaptionPresentation = (props) => {
     backgroundPosition:'center',
     backgroundRepeat: 'no-repeat',
   }
-  // return(
-  //   <div className = "oneMemly" style={divStyle}>
-  //   <div className="oneMemlyWrapper">
-  //   </div>
-  //   </div>
-  //   )
-
-// heyyy{console.log('props', props.memlys)} 
-      // <img src={props.memlys.map(memly=>memly.media.url)} />
-      // <img src=memly.media.url />
-      // {props.memlys.map(memly => memly.media.url)}
-
 
   return (
     <div>

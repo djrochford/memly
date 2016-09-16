@@ -8,10 +8,10 @@ import ProfileContainer from './components/user/profile/ProfileContainer'
 import EditProfileContainer from './components/user/editProfile/EditProfileContainer';
 import ImageUploadContainer from './components/media/upload/ImageUploadContainer'
 import GoogleMapContainer from './components/map/map/container';
-import SelectionContainer from './components/createStory/selection/container';
-import CaptionContainer from './components/createStory/addCaption/container'
-import TitleContainer from './components/createStory/addTitle/container'
-import Title2Container from './components/createStory/addTitle/titleContainer'
+import SelectionContainer from './components/createJourney/selection/container';
+import CaptionContainer from './components/createJourney/addCaption/container'
+import TitleContainer from './components/createJourney/addTitle/container'
+import Title2Container from './components/createJourney/addTitle/titleContainer'
 
 import axios from 'axios'
 

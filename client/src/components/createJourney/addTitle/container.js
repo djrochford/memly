@@ -6,11 +6,8 @@ import GoogleMap from 'google-map-react'
 import update from 'react-addons-update'
 import axios from 'axios'
 import { connect } from 'react-redux'
-// import store from '...../App.js'
 import store from '../../../App'
 import TitlePresentation from './presentation.js'
-// import * as mapActions from '../../../redux/mapReducer'
-// import * as userActions from '../../../redux/userReducer'
 
 class TitleContainer extends Component {
 
@@ -19,20 +16,19 @@ class TitleContainer extends Component {
   }
 
   componentDidMount() {
-    var dani = this.props.selection
-    console.log('userReducer', dani)
+    var props = this.props.selection
+    console.log('userReducer', props)
   }
 
   select(e) {
   }
 
   submit(e) {
-    console.log('in submit', this.response)
     axios.post('/user/journey', this.response)
     .then(function(res) {
-      console.log('this is the server response', res)
+      console.log('this is the server response', res);
       const path = '/user/profile';
-      hashHistory.push(path)
+      hashHistory.push(path);
     })
     
   }
@@ -53,10 +49,10 @@ class TitleContainer extends Component {
 
       <div className = "ProfileBoxes">
 
-       <button type="submit" id="submit" className = "editProfileButton'" value="submit" onClick={this.submit.bind(this)} ref={(c) => this.button = c} >Submit</button>
-      <div>
-        <strong>Title: </strong><input size="100" onChange= {e=>this.addTitle(e)}/>
-      </div>
+       <button type="submit" className = "editProfileButton'" value="submit" onClick={this.submit.bind(this)} ref={(c) => this.button = c} >Submit</button>
+        <div>
+          <strong>Title: </strong><input size="100" onChange= {e=>this.addTitle(e)}/>
+        </div>
 
         <div className ="MemlysContainer">
         {this.props.children}
@@ -67,11 +63,8 @@ class TitleContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state----------------------', state.userReducer)
   return {
-  //   currentUserLocation: state.mapReducer.currentUserLocation,
     selection: state.userReducer.selection
-  //   memlyIdStorage: state.memlysReducer.memlyIdStorage,
   }
 }
 

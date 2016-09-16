@@ -9,7 +9,7 @@ const Profile = (props) => {
   var aboutMe;
   if (props.userFacebook.bio) {
     aboutMe =           <Row className ="show-grid profileRow">
-            <span><b>About Dani!!!:</b> {props.userFacebook.bio}</span>
+            <span><b>About me:</b> {props.userFacebook.bio}</span>
           </Row>;
   } else {
     aboutMe = undefined;
