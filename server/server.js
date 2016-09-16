@@ -11,10 +11,12 @@ var auth = require('../db/auth/auth.js');
 var passport = require('passport');
 var authConfig = require('../db/auth/config.js');
 var logout = require('express-passport-logout');
-var User = require('../db/users/userModel.js');
+var User = require('../db/users/userModel.js').userModel;
 var mongoose = require('mongoose');
 var db = require('../db/database.js');
 var helper = require('./helperFunctions.js');
+var createAndSaveNewJourney = require('../db/journey/journeyUtils.js').createAndSaveNewJourney;
+var Journey = require('../db/journey/journeyModel').journeyModel;
 //------ instantiate app. connect middleware. -----//
 var app = express();
 
@@ -84,9 +86,9 @@ app.get('/auth/facebook/callback',
 //   }
 // };
 //check login for rerouting on client side 
-app.get('/isloggedin', helper.isLoggedIn, function(req,res){
+app.get('/isloggedin', helper.isLoggedIn, function(req, res) {
   res.sendStatus(202);
-})
+});
 
 //not for facbeook auth.. this is for profile button?
 app.get('/user/profile/', helper.isLoggedIn, function(req, res) {
@@ -128,7 +130,7 @@ app.put('/user/like-memly', function(req, res) {
         console.log(err);
       }
       res.send(user);
-    })
+    });
   } else {
     res.error('User must log in before doing that!');
   }
@@ -142,7 +144,7 @@ app.put('/user/dislike-memly', function(req, res) {
         console.log(err);
       }
       res.send(user);
-    })
+    });
   } else {
     res.error('User must log in before doing that!');
   }
@@ -184,8 +186,37 @@ app.post('/user/edit/profileinfo/', helper.isLoggedIn, function(req, res) {
 
 });
 
+//app.get('/user/journey/', function(req, res) {
+app.get('/user/journey/', helper.isLoggedIn, function(req, res) {
+  if (req.session.passport.user) {
+    var userID = req.session.passport.user['_id'];
+    //var userID = 'asdfasdfasdf12341234';
+    Journey.find({userId: userID}).exec(function(err, found) {
+      if (err) {
+        res.status(404).send('I don\' know who you are!');
+      } else {
+        res.status(200).json({journeys: found});
+      }
+    }); 
+  } else {
+    //var userID = 'asdfasdfasdf12341234';
+    res.redirect('http://localhost:3000/#');
+  }
 
+});
 
+//app.post('/user/journey/', function(req, res) {
+app.post('/user/journey/', helper.isLoggedIn, function(req, res) {
+
+  if (req.session.passport.user) {
+    createAndSaveNewJourney(req, function() {
+      res.sendStatus(201);
+    });
+  } else {
+    res.redirect('http://localhost:3000/#');
+  }
+
+});
 
 //Log out of session
 app.get('/logout', function(req, res) {
