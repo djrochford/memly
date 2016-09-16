@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Route, hashHistory, IndexRoute, Link } from 'react-router'
 import {Grid, Row, Col, Nav, NavItem} from 'react-bootstrap'
-
+import JourneyPlayerContainer from '../journeyPlayer/journeyPlayerContainer.js'
 
 
 const Profile = (props) => {
@@ -44,6 +44,11 @@ const Profile = (props) => {
   return (
 
     <Grid>
+      <Row className="show-grid" id="player-container">
+        <Col sm={12}>
+        <JourneyPlayerContainer/>
+        </Col>
+      </Row>
       <Row className = "show-grid" id ="userProfileContainer">
         <div>
           <Col sm={4}><img id = "profilePhoto" src={props.userFacebook.profilePhotoUrl}/></Col>
@@ -74,6 +79,7 @@ const Profile = (props) => {
 
     <Row id = "MemlyNavSelector">
         <span className="MemlyNavItem"><Link to ="user/profile" id="MemlyNavItemText">My Memlys ></Link></span>
+        <span className="MemlyNavItem"><Link to = "journeys" id="MemlyNavItemText2">My Journeys ></Link></span>
         <span className="MemlyNavItem"><Link to ="likedmemlys" id="MemlyNavItemText2">Memlys I Like ></Link></span>
        <span className="MemlyNavItem"><Link to ="edit" id="MemlyNavItemText3">Edit Profile ></Link></span>
        

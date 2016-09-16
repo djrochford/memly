@@ -19,19 +19,30 @@ var createAndSaveNewJourney = require('../db/journey/journeyUtils.js').createAnd
 var Journey = require('../db/journey/journeyModel').journeyModel;
 //------ instantiate app. connect middleware. -----//
 var app = express();
-
-
+var cookieParser = require('cookie-parser'); // the session is stored in a cookie, so we use this to parse it
+console.log('------------------------this is auth', auth)
+auth(app);
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  // if now() is after `req.session.cookie.expires`
+  //   regenerate the session
+  if(new Date() > req.session.cookie.expires) {
+    console.log('expired!!')
+
+  }
+  next();
+});
+
 
 // Configure our server with the passport middleware
-auth(app);
+
 
 // This runs our app through some middleware that allows saving to our database
 // CURRENTLY JUST IMAGES ARE CONFIGURED TO BE SAVED
-require('./../db/database')(app);
+require('./../db/database').app(app);
 
 //--- route config ----- //
 
@@ -57,17 +68,63 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: authConfig.
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 
-app.get('/', function(req, res) {
+app.get('/', helper.isLoggedIn, function(req, res) {
   console.log('AM I HITTING APP.GET?????');
   res.render('index');
 });
 
 
+app.get('/user/journeys', function(req, res) {
+
+ res.send({
+    journeys: [
+      {
+        userId: '3lkjrlfjei3orjlkf',
+        journeyTitle: 'Story of my life',
+        visits: 1,
+        createdDate: '2016-09-15T03:05:39.182Z',
+        pages: [
+          {
+            order: 0,
+            memlyId: 'jfkljfj3239283492fj',
+            imgUrl: 'http://dagobah.net/t200/poptartcat.jpg',
+            location: {
+              lat: 37.7929053,
+              lng: -122.399253
+            },
+            caption: 'This is where I fell down.'
+          },
+          {
+            order: 1,
+            memlyId: 'saldkjfsselej',
+            imgUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg',
+            location: {
+              lat: 19.2323,
+              lng: 44.4
+            },
+            caption: 'So scare'
+          },
+          {
+            order: 2,
+            memlyId: 'hoopadoop',
+            imgUrl: 'https://pbs.twimg.com/profile_images/616542814319415296/McCTpH_E.jpg',
+            location: {
+              lat: -167.9,
+              lng: - 14
+            },
+            caption: 'I\'m grumpy.'
+          },
+        ],
+      }
+    ]
+  });
+});
+
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000/#' }),
   function(req, res) {
     //console.log('LOGIN SUCCESS NOW SHOW ME THE USER---------------------->', req.user);
-    //console.log('SHOW ME WHAT THIS SESSION IS------------>', req.session.passport.user);
+    console.log('SHOW ME WHAT THIS SESSION IS------------>', req.session.passport.user);
     res.redirect('http://localhost:3000/#/user/profile/');
   });
 

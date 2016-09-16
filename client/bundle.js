@@ -71,7 +71,7 @@
 
 	var _reactRedux = __webpack_require__(263);
 
-	var _userReducer = __webpack_require__(292);
+	var _userReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./redux/userReducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _userReducer2 = _interopRequireDefault(_userReducer);
 
@@ -101,7 +101,7 @@
 	// Can be modified by dispatching actions on above reducers
 	// (see 'redux/' for actions)
 	var store = (0, _redux.createStore)(reducers);
-	console.log('omg store Get State=============:', store.getState().userReducer);
+
 	(0, _reactDom.render)(
 	// Provider will make the Redux-Store (state tree) accessible to ALL components. 
 	//(React specific helper module for simplifying redux!)
@@ -21539,15 +21539,19 @@
 
 	var _HomeContainer2 = _interopRequireDefault(_HomeContainer);
 
-	var _MyMemlysContainer = __webpack_require__(295);
+	var _MyMemlysContainer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/user/myMemlys/MyMemlysContainer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _MyMemlysContainer2 = _interopRequireDefault(_MyMemlysContainer);
+
+	var _myJourneysContainer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/user/myJourneys/myJourneysContainer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _myJourneysContainer2 = _interopRequireDefault(_myJourneysContainer);
 
 	var _LikedMemlysContainer = __webpack_require__(297);
 
 	var _LikedMemlysContainer2 = _interopRequireDefault(_LikedMemlysContainer);
 
-	var _ProfileContainer = __webpack_require__(299);
+	var _ProfileContainer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/user/profile/ProfileContainer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _ProfileContainer2 = _interopRequireDefault(_ProfileContainer);
 
@@ -21567,7 +21571,7 @@
 
 	var _container4 = _interopRequireDefault(_container3);
 
-	var _container5 = __webpack_require__(654);
+	var _container5 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/createJourney/addCaption/container\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _container6 = _interopRequireDefault(_container5);
 
@@ -21585,7 +21589,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//File contains the route setup to be exported to be used by App.js
 	var routes = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
@@ -21598,6 +21601,7 @@
 	      _reactRouter.Route,
 	      { path: '/user/profile', component: _ProfileContainer2.default },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _MyMemlysContainer2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/journeys', component: _myJourneysContainer2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/likedmemlys', component: _LikedMemlysContainer2.default })
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/photo', component: _ImageUploadContainer2.default }),
@@ -21613,6 +21617,7 @@
 
 	// you can use an onEnter hook before entering routes to check if user is authorized. (i.e. can check the state logged in or not)
 	// this is a good way to do client side route protection. Without this, although they may not be able to see any of their data, anyone can still enter /user/profile route
+	//File contains the route setup to be exported to be used by App.js
 	function checkAuth(nextState, replace, callback) {
 	  //the fact that we have been rerouted by server to here means that we are authorized to be here
 	  //but what if someone manually enters.. 'https:localhost:3000/user/profile'?
@@ -27575,7 +27580,7 @@
 
 	var _reactRedux = __webpack_require__(263);
 
-	var _userReducer = __webpack_require__(292);
+	var _userReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../redux/userReducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var userActions = _interopRequireWildcard(_userReducer);
 
@@ -27737,7 +27742,7 @@
 
 	var _reactRedux = __webpack_require__(263);
 
-	var _userReducer = __webpack_require__(292);
+	var _userReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../../redux/userReducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var userActions = _interopRequireWildcard(_userReducer);
 
@@ -31001,260 +31006,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 292 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.userAuth = userAuth;
-	exports.toggleLogIn = toggleLogIn;
-	exports.userUnauth = userUnauth;
-	exports.fetchUserSuccess = fetchUserSuccess;
-	exports.updateUserLocation = updateUserLocation;
-	exports.updateUserFacebook = updateUserFacebook;
-	exports.updateUserBirthday = updateUserBirthday;
-	exports.likeMemly = likeMemly;
-	exports.dislikeMemly = dislikeMemly;
-	exports.updateMemlyCount = updateMemlyCount;
-	exports.increaseMemlyCount = increaseMemlyCount;
-	exports.default = userReducer;
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	//reducer functions to modify state tree
-
-	// ------ ACTIONS FOR USER REDUCER --------- //
-	function userAuth(userID) {
-	  return {
-	    type: 'USER_AUTH',
-	    isLoggedIn: true,
-	    userID: userID
-	  };
-	}
-
-	function toggleLogIn(bool) {
-	  return {
-	    type: 'TOGGLE_LOGIN',
-	    isLoggedIn: bool
-	  };
-	}
-
-	function userUnauth() {
-	  return {
-	    type: 'USER_UNAUTH',
-	    isLoggedIn: false
-	  };
-	}
-
-	function fetchUserSuccess(user) {
-	  return {
-	    type: 'FETCHING_USER_SUCCESS',
-	    user: user
-	  };
-	}
-	// console.log('whaaaa',fetchUserSuccess('dani'))
-
-	function updateUserLocation(userLocation) {
-	  return {
-	    type: 'UPDATE_USER_LOCATION',
-	    userLocation: userLocation
-	  };
-	}
-
-	function updateUserFacebook(userFacebook) {
-	  return {
-	    type: 'UPDATE_USER_FACEBOOK',
-	    userFacebook: userFacebook
-	  };
-	}
-
-	function updateUserBirthday(birthday) {
-	  return {
-	    type: 'UPDATE_USER_BIRTHDAY',
-	    birthday: birthday
-	  };
-	}
-
-	function likeMemly(memlyId) {
-	  return {
-	    type: 'UPDATE_LIKED_MEMLYS',
-	    memlyId: memlyId
-	  };
-	}
-
-	function dislikeMemly(memlyId) {
-	  return {
-	    type: 'UPDATE_DISLIKED_MEMLYS',
-	    memlyId: memlyId
-	  };
-	}
-
-	function updateMemlyCount(memlyCount) {
-	  return {
-	    type: 'UPDATE_MEMLY_COUNT',
-	    memlyCount: memlyCount
-	  };
-	}
-
-	function increaseMemlyCount() {
-	  return {
-	    type: 'INCREASE_MEMLY_COUNT'
-	  };
-	}
-
-	// ----- SET USER REDUCER INITIAL STATE ------ //
-	var userInitialState = {
-	  userID: '',
-	  user: {},
-	  userFacebook: {},
-	  memlyCount: 0,
-	  isLoggedIn: false,
-	  error: '',
-	  likedMemlys: [],
-	  dislikedMemlys: [],
-	  userLocation: {
-	    lat: '',
-	    lng: ''
-	  },
-	  birthday: '',
-	  allMemlys: [],
-	  selection: []
-	};
-
-	// ------------ USER REDUCER -----------------//
-	function userReducer() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? userInitialState : arguments[0];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-
-	    case 'USER_LIST_MEMLYS':
-	      {
-	        return _extends({}, state, {
-	          allMemlys: action.memlys
-	        });
-	      }
-
-	    case 'SELECTED_MEMLYS':
-	      {
-	        return _extends({}, state, {
-	          selection: action.selection
-	        });
-	      }
-
-	    case 'USER_AUTH':
-	      return _extends({}, state, {
-	        isLoggedIn: true
-	      });
-
-	    case 'USER_UNAUTH':
-	      return _extends({}, state, {
-	        isLoggedIn: false,
-	        user: {},
-	        userID: ''
-	      });
-
-	    case 'TOGGLE_LOGIN':
-	      return _extends({}, state, {
-	        isLoggedIn: action.isLoggedIn
-	      });
-
-	    case 'FETCHING_USER_INFO':
-	      {
-	        return _extends({}, state, {
-	          isFetching: true
-	        });
-	      }
-
-	    case 'FETCHING_USER_INFO_ERROR':
-	      {
-	        return _extends({}, state, {
-	          isFetching: false,
-	          error: action.error
-	        });
-	      }
-
-	    case 'FETCHING_USER_SUCCESS':
-	      {
-	        if (action.user === null) {
-	          return _extends({}, state, {
-	            user: action.user,
-	            isFetching: false,
-	            error: ''
-	          });
-	        } else {
-	          if (action.userID = state.userID) {
-	            return _extends({}, state, {
-	              isFetching: false,
-	              info: action.user
-	            });
-	          }
-	        }
-	      }
-
-	    case 'UPDATE_USER_LOCATION':
-	      {
-	        // action should have userLocation property in the form of {lat: '', lng: ''}
-	        return _extends({}, state, {
-	          userLocation: action.UserLocation
-	        });
-	      }
-
-	    case 'UPDATE_USER_FACEBOOK':
-	      {
-	        return _extends({}, state, {
-	          userFacebook: action.userFacebook
-	        });
-	      }
-
-	    case 'UPDATE_USER_BIRTHDAY':
-	      {
-	        return _extends({}, state, {
-	          birthday: action.birthday
-	        });
-	      }
-
-	    case 'UPDATE_LIKED_MEMLYS':
-	      {
-	        return _extends({}, state, {
-	          likedMemlys: [].concat(_toConsumableArray(state.likedMemlys), [action.memlyId])
-	        });
-	      }
-
-	    case 'UPDATE_DISLIKED_MEMLYS':
-	      {
-	        return _extends({}, state, {
-	          dislikedMemlys: [].concat(_toConsumableArray(state.likedMemlys), [action.memlyId])
-	        });
-	      }
-
-	    case 'UPDATE_MEMLY_COUNT':
-	      {
-	        return _extends({}, state, {
-	          memlyCount: action.memlyCount
-	        });
-	      }
-
-	    case 'INCREASE_MEMLY_COUNT':
-	      {
-	        return _extends({}, state, {
-	          memlyCount: state.memlyCount++
-	        });
-	      }
-
-	    default:
-	      return state;
-
-	  }
-	}
-
-/***/ },
+/* 292 */,
 /* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31282,7 +31034,7 @@
 
 	var _reactRedux = __webpack_require__(263);
 
-	var _userReducer = __webpack_require__(292);
+	var _userReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../../redux/userReducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var userActions = _interopRequireWildcard(_userReducer);
 
@@ -31393,160 +31145,8 @@
 	exports.default = LoggedOutNav;
 
 /***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _MyMemlys = __webpack_require__(296);
-
-	var _MyMemlys2 = _interopRequireDefault(_MyMemlys);
-
-	var _reactRedux = __webpack_require__(263);
-
-	var _axios = __webpack_require__(241);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _userReducer = __webpack_require__(292);
-
-	var userActions = _interopRequireWildcard(_userReducer);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var MyMemlysContainer = function (_React$Component) {
-	  _inherits(MyMemlysContainer, _React$Component);
-
-	  function MyMemlysContainer(props) {
-	    _classCallCheck(this, MyMemlysContainer);
-
-	    var _this = _possibleConstructorReturn(this, (MyMemlysContainer.__proto__ || Object.getPrototypeOf(MyMemlysContainer)).call(this, props));
-
-	    _this.state = {
-
-	      userFacebookMyMemlys: []
-	      // user: {name: 'John Doe', bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", photo: 'https://scontent.fsnc1-1.fna.fbcdn.net/v/t1.0-9/12573749_10154006811453254_341075965445440422_n.jpg?oh=b02c70e4bf73bf3249ce0ac3e043728e&oe=5838B687', myMemlys: [{url: 'https://scontent.fsnc1-1.fna.fbcdn.net/t31.0-8/12513863_10153994331308254_5263164911566385787_o.jpg' , location: 'New York'},{url: 'https://scontent.fsnc1-1.fna.fbcdn.net/v/t1.0-9/12573749_10154006811453254_341075965445440422_n.jpg?oh=b02c70e4bf73bf3249ce0ac3e043728e&oe=5838B687' , location: 'New York'},{url: 'https://scontent.fsnc1-1.fna.fbcdn.net/t31.0-8/10519185_10152587430858254_7205025064661326895_o.jpg' , location: 'New York'},{url: 'https://scontent.fsnc1-3.fna.fbcdn.net/t31.0-8/10265664_10152863685678254_2720788227246186432_o.jpg' , location: 'New York'}, {url: 'https://scontent.fsnc1-1.fna.fbcdn.net/t31.0-8/13323656_10154379664888254_6700518311860962886_o.jpg', location: 'San Francisco'}], likedMemlys: [{url: 'https://scontent.fsnc1-3.fna.fbcdn.net/t31.0-8/13938311_1131762946908530_6242907422971776062_o.jpg', location: 'San Jose'}, {url: 'https://scontent.fsnc1-3.fna.fbcdn.net/v/t1.0-9/14225455_1107962689239467_1782382838638034127_n.jpg?oh=f36a23bd6873261d9569822fc59db40e&oe=58541FE4', location: 'Napa'}]}
-	    };
-
-	    return _this;
-	  }
-
-	  _createClass(MyMemlysContainer, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var context = this;
-	      console.log(this.props, 'profileComponentWillMount');
-	      // var context = this;
-	      // this.props.dispatch(userActions.userAuth());
-
-	      //turn isLogged in as true so nav bar shows logged in buttons
-	      _axios2.default.get('/user/retrieve/profileinfo/').then(function (res) {
-	        console.log('what is this response on client side', res.data);
-
-	        context.setState({
-	          userFacebookMyMemlys: res.data.memlys
-	        });
-
-	        return res;
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-
-	      console.log(this.props, 'MyMemlysContainer props');
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'ProfileBoxes' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'MemlysContainer' },
-	          this.state.userFacebookMyMemlys.map(function (item, index) {
-	            return _react2.default.createElement(_MyMemlys2.default, { key: index, item: item });
-	          })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return MyMemlysContainer;
-	}(_react2.default.Component);
-
-	// function mapStateToProps (state) {
-	//   return {
-	//     userFacebook: state.userReducer.userFacebook
-	//   }
-	// }
-
-	// export default connect(mapStateToProps)(MyMemlysContainer);
-
-
-	MyMemlysContainer.propTypes = {
-	  userFacebook: _react.PropTypes.object
-	};
-	MyMemlysContainer.propTypes = {
-
-	  userFacebook: _react.PropTypes.object
-
-	};
-	exports.default = MyMemlysContainer;
-
-/***/ },
-/* 296 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(174);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var MyMemlys = function MyMemlys(props) {
-	  //inline CSS style. fills the entire oneMemly div with photo
-	  console.log('MyMemlys mediaUrl', props.item);
-	  var divStyle = {
-	    backgroundImage: 'url(' + props.item + ')',
-	    backgroundPosition: 'center',
-	    backgroundSize: 'cover',
-	    backgroundRepeat: 'no-repeat'
-	  };
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'oneMemly', style: divStyle },
-	    _react2.default.createElement('div', { className: 'oneMemlyWrapper' })
-	  );
-	};
-
-	exports.default = MyMemlys;
-
-/***/ },
+/* 295 */,
+/* 296 */,
 /* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31672,395 +31272,8 @@
 	exports.default = LikedMemlys;
 
 /***/ },
-/* 299 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Profile = __webpack_require__(300);
-
-	var _Profile2 = _interopRequireDefault(_Profile);
-
-	var _axios = __webpack_require__(241);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _reactRedux = __webpack_require__(263);
-
-	var _userReducer = __webpack_require__(292);
-
-	var userActions = _interopRequireWildcard(_userReducer);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ProfileContainer = function (_React$Component) {
-	  _inherits(ProfileContainer, _React$Component);
-
-	  function ProfileContainer(props) {
-	    _classCallCheck(this, ProfileContainer);
-
-	    return _possibleConstructorReturn(this, (ProfileContainer.__proto__ || Object.getPrototypeOf(ProfileContainer)).call(this, props));
-	    //   this.state = {
-	    //     //some hardcoded user data for test purposes
-	    //     user: {name: 'John Doe', bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", city:'San Francisco', photo: 'https://scontent.fsnc1-3.fna.fbcdn.net/t31.0-8/11232282_10153700263958254_6749315989191466632_o.jpg', myMemlys: [{url: 'https://scontent.fsnc1-3.fna.fbcdn.net/t31.0-8/10265664_10152863685678254_2720788227246186432_o.jpg' , location: 'New York'}, {url: 'https://scontent.fsnc1-3.fna.fbcdn.net/v/t1.0-9/11692782_10153548376573254_4076114351065122781_n.jpg?oh=98d0d35e39a1b376c806bee7bb47f075&oe=584175A8', location: 'San Francisco'}], likedMemlys: [{url: 'https://scontent.fsnc1-3.fna.fbcdn.net/t31.0-8/13938311_1131762946908530_6242907422971776062_o.jpg', location: 'San Jose'}, {url: 'https://scontent.fsnc1-3.fna.fbcdn.net/v/t1.0-9/14225455_1107962689239467_1782382838638034127_n.jpg?oh=f36a23bd6873261d9569822fc59db40e&oe=58541FE4', location: 'Napa'}]},
-	    //     userFacebook: {},
-	    //     memlyCount: 99
-	    //   }
-	    // if(!props.isLoggedIn){
-	    //   context.router.push('/');
-	    // }
-	  }
-
-	  _createClass(ProfileContainer, [{
-	    key: 'DateParser',
-	    value: function DateParser(date) {
-	      console.log('checking date format', date);
-	      var dateArray = date.split('/');
-	      var month = Number(dateArray[0]);
-	      if (month === 1) {
-	        month = 'January';
-	      } else if (month === 2) {
-	        month = 'February';
-	      } else if (month === 3) {
-	        month = 'March';
-	      } else if (month === 4) {
-	        month = 'April';
-	      } else if (month === 5) {
-	        month = 'May';
-	      } else if (month === 6) {
-	        month = 'June';
-	      } else if (month === 7) {
-	        month = 'July';
-	      } else if (month === 8) {
-	        month = 'August';
-	      } else if (month === 9) {
-	        month = 'September';
-	      } else if (month === 10) {
-	        month = 'October';
-	      } else if (month === 11) {
-	        month = 'November';
-	      } else if (month === 12) {
-	        month = 'December';
-	      }
-
-	      var day = Number(dateArray[1]);
-	      var year = dateArray[2];
-
-	      var dateFormatted = month + ' ' + day + ', ' + year;
-	      return dateFormatted;
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      console.log(this.props, 'profileComponentWillMount');
-	      // var context = this;
-	      this.props.dispatch(userActions.userAuth());
-
-	      //turn isLogged in as true so nav bar shows logged in buttons
-	      _axios2.default.get('/user/retrieve/profileinfo/').then(function (res) {
-	        _this2.props.dispatch(userActions.updateUserFacebook(res.data));
-	        _this2.props.dispatch(userActions.updateMemlyCount(res.data.memlys.length));
-	        console.log('checking userFacebook props ------>', _this2.props.userFacebook.memlys.length);
-	        // res.data.birthday = this.DateParser(res.data.birthday);
-	        // this.props.dispatch(userActions.updateUserBirthday(res.data.birthday));
-	        return res;
-	      });
-	      // .then((res) => {
-	      //   res.data.birthday = this.DateParser(res.data.birthday);
-	      //   //why are we doing this twice? 
-	      //   this.props.dispatch(userActions.updateUserBirthday(res.data.birthday));
-	      //   this.props.dispatch(userActions.updateMemlyCount(res.data.memlys.length));
-	      //   this.props.dispatch(userActions.updateUserFacebook(res.data));
-
-	      //   // context.setState({
-	      //   //   userFacebook: res.data,
-	      //   //   memlyCount: res.data.memlys.length
-	      //   // });
-
-
-	      // });
-	      // this.props.changeNavToAlreadyLoggedIn();
-	    }
-
-	    // componentDidMount(){
-	    //   console.log(this.props, 'profileComponentDidMount'); 
-	    //   // props.isLoggedIn should be TRUE...
-	    // }
-
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(props, next) {
-	      console.log(props, next, 'ProfileContainer componentWillReceiveProps');
-	    }
-	    //SEE NOTE BELOW
-	    // updateUserData(data) {
-	    //   console.log('calling updateUserdata', data);
-	    //   this.setState({
-	    //     userFacebook: data
-	    //   });
-	    // }
-
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-
-	      //BECAUSE OF HOW REDUX WORKS. CHILDREN WILL BE ABLE TO CHANGE AND OBTAIN STATE!
-	      // var context = this;
-	      // var childUpdateUserData = this.updateUserData.bind(this);
-	      // const childrenWithProps = React.Children.map(this.props.children,
-	      //   (child) => React.cloneElement(child, {
-	      //     updateUserData: childUpdateUserData,
-	      //   })
-	      // );
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_Profile2.default, { user: this.props.user, userFacebook: this.props.userFacebook, memlyCount: this.props.memlyCount }),
-	        this.props.children
-	      );
-	    }
-	  }]);
-
-	  return ProfileContainer;
-	}(_react2.default.Component);
-
-	ProfileContainer.propTypes = {
-	  isLoggedIn: _react.PropTypes.bool,
-	  user: _react.PropTypes.object,
-	  userFacebook: _react.PropTypes.object,
-	  memlyCount: _react.PropTypes.number
-	};
-
-
-	function mapStateToProps(state) {
-	  return {
-	    isLoggedIn: state.userReducer.isLoggedIn,
-	    user: state.userReducer.user,
-	    userFacebook: state.userReducer.userFacebook,
-	    memlyCount: state.userReducer.memlyCount,
-	    birthday: state.userReducer.birthday
-	  };
-	}
-
-	ProfileContainer.contextTypes = {
-	  router: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(ProfileContainer);
-
-/***/ },
-/* 300 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(174);
-
-	var _reactBootstrap = __webpack_require__(301);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Profile = function Profile(props) {
-
-	  var aboutMe;
-	  if (props.userFacebook.bio) {
-	    aboutMe = _react2.default.createElement(
-	      _reactBootstrap.Row,
-	      { className: 'show-grid profileRow' },
-	      _react2.default.createElement(
-	        'span',
-	        null,
-	        _react2.default.createElement(
-	          'b',
-	          null,
-	          'About me:'
-	        ),
-	        ' ',
-	        props.userFacebook.bio
-	      )
-	    );
-	  } else {
-	    aboutMe = undefined;
-	  }
-
-	  var divStyle = {
-	    backgroundImage: 'url(' + props.userFacebook.profilePhotoUrl + ')',
-	    backgroundPosition: 'center',
-	    backgroundSize: 'cover',
-	    backgroundRepeat: 'no-repeat'
-	  };
-
-	  // return (
-
-	  //   <div id="myProfile">
-	  //     <div id="profilePhotoContainer" style={divStyle}>
-	  //       <div id="profilePhotoWrapper">
-	  //       </div>
-	  //     </div>
-	  //     <div id="profileBioContainer">
-	  //       <span id= "profileName">{props.userFacebook.name}</span>
-	  //     </div>
-
-	  //   </div>
-
-
-	  // )
-
-
-	  return _react2.default.createElement(
-	    _reactBootstrap.Grid,
-	    null,
-	    _react2.default.createElement(
-	      _reactBootstrap.Row,
-	      { className: 'show-grid', id: 'userProfileContainer' },
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _reactBootstrap.Col,
-	          { sm: 4 },
-	          _react2.default.createElement('img', { id: 'profilePhoto', src: props.userFacebook.profilePhotoUrl })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        _reactBootstrap.Col,
-	        { sm: 8 },
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'show-grid profileName' },
-	          _react2.default.createElement(
-	            'span',
-	            { id: 'profileName' },
-	            props.userFacebook.name
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'show-grid profileRow' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            _react2.default.createElement(
-	              'b',
-	              null,
-	              'Email:'
-	            ),
-	            ' ',
-	            props.userFacebook.email
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'show-grid profileRow' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            _react2.default.createElement(
-	              'b',
-	              null,
-	              'Age is just a number:'
-	            ),
-	            ' ',
-	            props.userFacebook.birthday
-	          )
-	        ),
-	        aboutMe,
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'show-grid profileRow' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            _react2.default.createElement(
-	              'b',
-	              null,
-	              'Memlys Made:'
-	            ),
-	            ' ',
-	            props.memlyCount
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Row,
-	          { className: 'show-grid profileRow' },
-	          _react2.default.createElement(
-	            'button',
-	            { size: '30', onClick: function onClick(e) {
-	                var path = '/selection';
-	                _reactRouter.hashHistory.push(path);
-	              } },
-	            'Make New Journey'
-	          )
-	        )
-	      )
-	    ),
-	    _react2.default.createElement(
-	      _reactBootstrap.Row,
-	      { id: 'MemlyNavSelector' },
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'MemlyNavItem' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'user/profile', id: 'MemlyNavItemText' },
-	          'My Memlys >'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'MemlyNavItem' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'likedmemlys', id: 'MemlyNavItemText2' },
-	          'Memlys I Like >'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'MemlyNavItem' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'edit', id: 'MemlyNavItemText3' },
-	          'Edit Profile >'
-	        )
-	      )
-	    )
-	  );
-	};
-
-	exports.default = Profile;
-
-/***/ },
+/* 299 */,
+/* 300 */,
 /* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -51002,7 +50215,7 @@
 
 	var _reactRedux = __webpack_require__(263);
 
-	var _userReducer = __webpack_require__(292);
+	var _userReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../../redux/userReducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var userActions = _interopRequireWildcard(_userReducer);
 
@@ -51805,7 +51018,7 @@
 
 	var mapActions = _interopRequireWildcard(_mapReducer);
 
-	var _userReducer = __webpack_require__(292);
+	var _userReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../../redux/userReducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var userActions = _interopRequireWildcard(_userReducer);
 
@@ -62676,187 +61889,8 @@
 	exports.default = SelectionPresentation;
 
 /***/ },
-/* 654 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(174);
-
-	var _reactAddonsShallowCompare = __webpack_require__(561);
-
-	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
-
-	var _reactControllables = __webpack_require__(563);
-
-	var _reactControllables2 = _interopRequireDefault(_reactControllables);
-
-	var _googleMapReact = __webpack_require__(609);
-
-	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
-
-	var _reactAddonsUpdate = __webpack_require__(641);
-
-	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
-
-	var _axios = __webpack_require__(241);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _reactRedux = __webpack_require__(263);
-
-	var _App = __webpack_require__(1);
-
-	var _App2 = _interopRequireDefault(_App);
-
-	var _presentation = __webpack_require__(655);
-
-	var _presentation2 = _interopRequireDefault(_presentation);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //need to look into use for this... allows you to control prop types somehow...
-
-
-	var CaptionContainer = function (_Component) {
-	  _inherits(CaptionContainer, _Component);
-
-	  function CaptionContainer(props) {
-	    _classCallCheck(this, CaptionContainer);
-
-	    return _possibleConstructorReturn(this, (CaptionContainer.__proto__ || Object.getPrototypeOf(CaptionContainer)).call(this, props));
-	  }
-
-	  _createClass(CaptionContainer, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var props = this.props.selection;
-	      console.log('userReducer', props);
-	    }
-	  }, {
-	    key: 'submit',
-	    value: function submit(e) {
-	      console.log('in submit');
-	      this.props.dispatch({
-	        type: 'SELECTED_MEMLYS',
-	        selection: this.props.selection
-	      });
-	      var path = '/addtitle';
-	      _reactRouter.hashHistory.push(path);
-	    }
-	  }, {
-	    key: 'addCaption',
-	    value: function addCaption(e, url, order) {
-	      var page = this.props.selection[order];
-	      page.caption = e.target.value;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'ProfileBoxes' },
-	        _react2.default.createElement(
-	          'button',
-	          { type: 'submit', className: 'editProfileButton\'', value: 'submit', onClick: this.submit.bind(this), ref: function ref(c) {
-	              return _this2.button = c;
-	            } },
-	          'Submit'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'MemlysContainer' },
-	          this.props.selection && this.props.selection.map(function (page) {
-	            return _react2.default.createElement(_presentation2.default, { url: page.imgUrl, order: page.order, addCaption: _this2.addCaption.bind(_this2) });
-	          })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return CaptionContainer;
-	}(_react.Component);
-
-	function mapStateToProps(state) {
-	  return {
-	    selection: state.userReducer.selection
-	  };
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(CaptionContainer);
-
-/***/ },
-/* 655 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _googleMapReact = __webpack_require__(609);
-
-	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var CaptionPresentation = function CaptionPresentation(props) {
-	  var divStyle = {
-	    backgroundImage: 'url(' + props.url + ')',
-	    backgroundSize: 'cover',
-	    backgroundPosition: 'center',
-	    backgroundRepeat: 'no-repeat'
-	  };
-
-	  var capStyle = {
-	    backgroundSize: 'cover',
-	    backgroundPosition: 'center',
-	    backgroundRepeat: 'no-repeat'
-	  };
-
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'oneMemly', style: divStyle, 'data-url': props.url },
-	      _react2.default.createElement('div', { className: 'oneMemlyWrapper' })
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'oneMemly', style: capStyle },
-	      'Caption: ',
-	      _react2.default.createElement('input', { onChange: function onChange(e) {
-	          return props.addCaption(e, props.url, props.order);
-	        }, size: '60', maxlength: '140', width: '48', height: '48' })
-	    )
-	  );
-	};
-
-	exports.default = CaptionPresentation;
-
-/***/ },
+/* 654 */,
+/* 655 */,
 /* 656 */
 /***/ function(module, exports, __webpack_require__) {
 

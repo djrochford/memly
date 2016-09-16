@@ -1,10 +1,8 @@
-import React, { PropTypes } from 'react'
-import MyMemlys from './MyMemlys'
-import { connect } from 'react-redux'
-import axios from 'axios'
-import * as userActions from '../../../redux/userReducer'
-
-
+import React, { PropTypes } from 'react';
+import MyMemlys from './MyMemlys';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import * as userActions from '../../../redux/userReducer';
 
 class MyMemlysContainer extends React.Component {
   static propTypes = {
@@ -36,7 +34,7 @@ class MyMemlysContainer extends React.Component {
 
 
 
-  componentWillMount() {
+  componentDidMount() {
     var context = this;
     console.log(this.props, 'profileComponentWillMount');
     // var context = this;
@@ -65,9 +63,10 @@ class MyMemlysContainer extends React.Component {
     
 
     return(
+
       <div className = "ProfileBoxes">
         <div className ="MemlysContainer">
-        {this.state.userFacebookMyMemlys.map((item, index) => <MyMemlys key={index} item={item}/>)}
+        {this.state.userFacebookMyMemlys && this.state.userFacebookMyMemlys.map((item, index) => <MyMemlys key={index} item={item}/>)}
         </div>
       </div>
       )

@@ -677,8 +677,6 @@ ul {
   background-color: #f6f6f6;
   box-shadow: 0 0px 4px rgba(120, 120, 120, 0.6); }
 
-
-
 #disabledCursor { 
   cursor: default; 
   pointer-events: auto;
