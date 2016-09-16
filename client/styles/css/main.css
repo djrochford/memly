@@ -676,10 +676,3 @@ ul {
   z-index: 999999;
   background-color: #f6f6f6;
   box-shadow: 0 0px 4px rgba(120, 120, 120, 0.6); }
-
-#disabledCursor { 
-  cursor: default; 
-  pointer-events: auto;
-background-color: #e7e7e7; 
-color: black;
-}
