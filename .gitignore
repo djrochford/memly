@@ -8,7 +8,7 @@ server/config/config.js
 
 db/auth/keys.js
 
-bundle.js
+client/bundle.js
 
 */.DS_Store
 

@@ -109,13 +109,10 @@ const userInitialState = {
     lng: '',
   },
   birthday: '',
-<<<<<<< HEAD
   allMemlys: [],
-  selection: []
-=======
+  selection: [],
   pageIndex: 0,
-  currentJourney: {}
->>>>>>> profileDisplayJourney
+  currentJourney: {},
 }
 
 // ------------ USER REDUCER -----------------//
