@@ -56,12 +56,19 @@ const Profile = (props) => {
             <span><b>Email:</b> {props.userFacebook.email}</span>
           </Row>
           <Row className ="show-grid profileRow">
-            <span><b>Birthday:</b> {props.userFacebook.birthday}</span>
+            <span><b>Age is just a number:</b> {props.userFacebook.birthday}</span>
           </Row>
           {aboutMe}
           <Row className ="show-grid profileRow">
             <span><b>Memlys Made:</b> {props.memlyCount}</span>
           </Row>
+          <Row className ="show-grid profileRow">
+            <button size="30" onClick={e=> {
+              const path = '/selection';
+              hashHistory.push(path); }
+            }>Make New Journey</button>
+          </Row>
+          
         </Col>
     </Row>
 

@@ -4,6 +4,7 @@ import { Router, Route, hashHistory, IndexRoute, Link } from 'react-router'
 
 const LikedMemlys = (props) => {
   //inline CSS style. fills the entire oneMemly div with photo
+  console.log('likedMemlys mediaUrl', props.item.mediaUrl)
   const divStyle = {
     backgroundImage: 'url(' +props.item.mediaUrl+ ')',
     backgroundSize: 'cover',

@@ -29,6 +29,7 @@ export function fetchUserSuccess (user) {
     user,
   }
 }
+// console.log('whaaaa',fetchUserSuccess('dani'))
 
 export function updateUserLocation (userLocation) {
   return {
@@ -93,12 +94,28 @@ const userInitialState = {
     lng: '',
   },
   birthday: '',
+  allMemlys: [],
+  selection: []
 }
 
 // ------------ USER REDUCER -----------------//
 export default function userReducer (state = userInitialState, action) {
   switch(action.type){
-   
+
+   case 'USER_LIST_MEMLYS' : {
+     return {
+       ...state, 
+       allMemlys: action.memlys
+     }
+   }
+
+  case 'SELECTED_MEMLYS' : {
+    return {
+      ...state, 
+      selection: action.selection
+    }
+  }
+
    case 'USER_AUTH' :  
     return {
       ...state, 
