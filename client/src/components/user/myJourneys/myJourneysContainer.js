@@ -13,7 +13,7 @@ class MyJourneysContainer extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/user/journeys')
+    axios.get('/user/journey')
     .then((res) => {
       store.dispatch(userActions.setJourneys(res.data.journeys));
       console.log('Journeys Got');
