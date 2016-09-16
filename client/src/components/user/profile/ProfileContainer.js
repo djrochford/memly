@@ -138,6 +138,7 @@ class ProfileContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log('----------------------', state.userReducer, state.userReducer.userFacebook);
   return {
     isLoggedIn: state.userReducer.isLoggedIn,
     user: state.userReducer.user,
