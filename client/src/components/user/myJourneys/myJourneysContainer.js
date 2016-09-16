@@ -21,15 +21,15 @@ class MyJourneysContainer extends React.Component {
     .catch((err) => {
       console.log('Error getting journeys', err);
     });
+
   }
 
   render() {
-    console.log('in the myjourneys container', this.props.journeys);
     return (
       <div className = "ProfileBoxes">
         <div className = "MemlysContainer">
           {this.props.journeys && this.props.journeys.map((journey, index) => (
-            <MyJourneys key={index} journey={journey}/>
+            <MyJourneys key={index} journey={journey} pageIndex={this.props.pageIndex}/>
           ))}
         </div>
       </div>
@@ -41,6 +41,7 @@ class MyJourneysContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     journeys: state.userReducer.journeys,
+    pageIndex: state.userReducer.pageIndex
   }
 }
 

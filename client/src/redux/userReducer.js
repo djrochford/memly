@@ -85,6 +85,13 @@ export function setJourneys(journeys) {
   }
 }
 
+export function pageIndexChange(limit) {
+  return {
+    type: 'PAGE_INDEX_CHANGE',
+    limit
+  }
+}
+
 // ----- SET USER REDUCER INITIAL STATE ------ //
 const userInitialState = {
   userID: '',
@@ -101,6 +108,7 @@ const userInitialState = {
     lng: '',
   },
   birthday: '',
+  pageIndex: 0
 }
 
 // ------------ USER REDUCER -----------------//
@@ -218,6 +226,20 @@ export default function userReducer (state = userInitialState, action) {
       return {
         ...state,
         journeys: action.journeys
+      }
+    }
+
+    case 'PAGE_INDEX_CHANGE' : {
+      if (state.pageIndex + 1 === action.limit) {
+        return {
+          ...state,
+          pageIndex: 0
+        }
+      } else {
+        return {
+          ...state,
+          pageIndex: state.pageIndex + 1
+        }
       }
     }
   

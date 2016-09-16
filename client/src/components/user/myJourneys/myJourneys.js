@@ -1,25 +1,20 @@
-import React from 'react'
-import { Router, Route, hashHistory, IndexRoute, Link } from 'react-router'
-
+import React from 'react';
 
 const MyJourneys = (props) => {
 
-  // const divStyle = {
-  //   backgroundImage: `url(${props.journey.pages[0].imgUrl})`,
-  //   backgroundPosition: 'center',
-  //   backgroundSize: 'cover',
-  //   backgroundRepeat: 'no-repeat'
-  // }
-
-  for 
+  var divStyle = {
+    backgroundImage: `url(${props.journey.pages[props.pageIndex].imgUrl})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
+  };
 
   return (
     <div className="oneMemly" style={divStyle}>
       <div className="oneMemlyWrapper">
-        <img class="journey-image" src={props.journey.}
       </div>
     </div>
   )
-}
+};
 
 export default MyJourneys;
