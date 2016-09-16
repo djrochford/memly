@@ -6,6 +6,9 @@ import * as userActions from '../../../redux/userReducer'
 
 class ProfileContainer extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
   
   static propTypes = {
     isLoggedIn: PropTypes.bool, 
