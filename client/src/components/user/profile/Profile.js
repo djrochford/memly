@@ -45,7 +45,9 @@ const Profile = (props) => {
 
     <Grid>
       <Row className="show-grid" id="player-container">
+        <Col sm={12}>
         <JourneyPlayerContainer/>
+        </Col>
       </Row>
       <Row className = "show-grid" id ="userProfileContainer">
         <div>

@@ -7,9 +7,10 @@ const JourneyPlayer = ({journey}) => {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 2000,
-    fade: true,
     infinite: true,
     lazyLoad: true,
+    fade: true,
+    pauseOnHover: false,
   }
 
   if (journey.pages) {
