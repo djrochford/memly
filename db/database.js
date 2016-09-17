@@ -5,6 +5,7 @@ var mime = require('mime');
 var mediaUpload = require('./aws/media');
 var profileUpload = require('./aws/uploadProfilePhoto');
 var Memly = require('./memly/model').memlyModel;
+var Journey = require('./journey/journeyModel.js').journeyModel;
 
 var mongooseUri =
   process.env.MONGODB_URI ||
@@ -83,7 +84,43 @@ module.exports.app = function(app) {
     });
   });
 
+  app.get('/api/nearbyjourneys', function(req, res) {
+    // Acknowledge current user location
+    var userLocation = {
+      lat: parseFloat(req.query.lat),
+      lng: parseFloat(req.query.lng)
+    };
+
+    // Find any within 0.05 +/- lat and lng of current user location
+    // which should equate to ~1.15 miles diameter circle centered on user
+    var minLat = userLocation.lat - 0.05;
+    var maxLat = userLocation.lat + 0.05;
+    var minLng = userLocation.lng - 0.05;
+    var maxLng = userLocation.lng + 0.05;
+
+    // Query database for any Journeys that contain at least 1 photo that are within range
+    // http://mongoosejs.com/docs/queries.html
+
+    // Find all journeys where at least one photo is in range of the specified lat/lng
+    Journey.find({
+      pages: {
+        $elemMatch: {
+          'location.lat': { $gt: minLat, $lt: maxLat },
+          'location.lng': { $gt: minLng, $lt: maxLng }
+        }
+      }
+    }, function(err, journeys) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({journeys: journeys});
+      }
+    });
+  });
+
+
+
 };
 
-console.log('wahhhhhh', mongoose)
+console.log('wahhhhhh', mongoose);
 module.exports.mongoose = mongoose;

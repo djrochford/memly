@@ -1,6 +1,6 @@
 var AWS = require('aws-sdk');
 var fs = require('fs');
-var User = require('../users/userModel');
+var User = require('../users/userModel').userModel;
 var env = require('./config/environment');
 if (process.env.NODE_ENV === 'development') {
   var keys = require('./config/keys');
