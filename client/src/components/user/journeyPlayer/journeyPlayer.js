@@ -11,24 +11,27 @@ const JourneyPlayer = ({journey}) => {
     lazyLoad: true,
     fade: true,
     pauseOnHover: false,
-  }
+  };
 
   const capStyle = {
     backgroundSize: 'cover',
-    backgroundPosition:'center',
+    backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-  }
+    maxheight: '90%',
+    maxwidth: '90%',
+    margin: 'auto'
+  };
 
   if (journey.pages) {
     var images = journey.pages.map((page, index)=>(
       <img src={page.imgUrl}/>
     ));
     var showCap = journey.pages.map((page, index) => (
-      <img alt={page.caption}/>
+      <img className = "journeyPlayerCaption" alt={page.caption}/>
     ));
   } else {
-    var images = (<div></div>)
-    var showCap = (<div></div>)
+    var images = (<div></div>);
+    var showCap = (<div></div>);
   }
 
 //   if (journey.pages) {
@@ -39,7 +42,7 @@ const JourneyPlayer = ({journey}) => {
 
 
   return (
-    <div className = "oneMemly" style = {capStyle}  >
+    <div className = "oneJourneyPlayer" style = {capStyle} >
         <Slider {...sliderSettings}>
           {images}
         </Slider>
@@ -47,7 +50,7 @@ const JourneyPlayer = ({journey}) => {
           {showCap}
         </Slider>
     </div>
-  )
+  );
 };
 
 export default JourneyPlayer;
