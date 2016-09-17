@@ -326,13 +326,9 @@ which is where index.html points to
   font-family: 'Roboto', sans-serif;
   font-weight: 100; }
 
-.nav a {
-  color: white;
-} 
-
-a:link, a:hover, a:active, a:visited {
+a, a:link, a:hover, a:active, a:visited {
   text-decoration: none;
-}
+  color: white; }
 
 a:hover {
   color: #e6f1ff; }
@@ -504,7 +500,7 @@ ul {
   font-size: 150%;
   padding-right: 2%; }
 
-.MemlyNavItemText2 {
+#MemlyNavItemText2 {
   color: #1da1f2;
   font-size: 150%;
   padding-left: 2%;
@@ -518,7 +514,7 @@ ul {
 #MemlyNavItemText:hover {
   color: blue; }
 
-.MemlyNavItemText2:hover {
+#MemlyNavItemText2:hover {
   text-decoration: none;
   color: blue; }
 
