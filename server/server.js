@@ -62,8 +62,54 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/test/api/nearbyjourneys', function(req, res) {
+  res.send({
+    journeys: [
+      {
+        userId: '3lkjrlfjei3orjlkf',
+        username: 'Leia',
+        avatarUrl: 'https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia\'s_characteristic_hairstyle.jpg',
+        journeyTitle: 'Story of my life',
+        visits: 1,
+        createdDate: '2016-09-15T03:05:39.182Z',
+        pages: [
+          {
+            order: 0,
+            memlyId: 'jfkljfj3239283492fj',
+            imgUrl: 'http://dagobah.net/t200/poptartcat.jpg',
+            location: {
+              lat: 37.7929053,
+              lng: -122.399253
+            },
+            caption: 'This is where I fell down.'
+          },
+          {
+            order: 1,
+            memlyId: 'saldkjfsselej',
+            imgUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg',
+            location: {
+              lat: 19.2323,
+              lng: 44.4
+            },
+            caption: 'So scare'
+          },
+          {
+            order: 2,
+            memlyId: 'hoopadoop',
+            imgUrl: 'https://pbs.twimg.com/profile_images/616542814319415296/McCTpH_E.jpg',
+            location: {
+              lat: -167.9,
+              lng: - 14
+            },
+            caption: 'I\'m grumpy.'
+          },
+        ],
+      }
+    ]
+  });
+});
 
-app.get('/user/journeys', function(req, res) {
+app.get('/test/user/journeys', function(req, res) {
 
  res.send({
     journeys: [

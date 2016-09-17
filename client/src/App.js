@@ -7,6 +7,7 @@ import userReducer from './redux/userReducer'
 import memlysReducer from './redux/memlysReducer'
 import mapReducer from './redux/mapReducer'
 import imageUploadReducer from './redux/imageUploadReducer'
+import journeysReducer from './redux/journeysReducer'
 
 // Combine reducers to be included in 'createStore'
 const reducers = combineReducers({
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   memlysReducer,
   mapReducer,
   imageUploadReducer,
+  journeysReducer,
 })
 
 // Create store that houses state-tree of app

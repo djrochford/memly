@@ -5,6 +5,7 @@ import HomeContainer from './components/home/HomeContainer';
 import MyMemlysContainer from './components/user/myMemlys/MyMemlysContainer';
 import MyJourneysContainer from './components/user/myJourneys/myJourneysContainer';
 import LikedMemlysContainer from './components/user/likedMemlys/LikedMemlysContainer';
+import LikedJourneysContainer from './components/user/likedJourneys/likedJourneysContainer';
 import ProfileContainer from './components/user/profile/ProfileContainer';
 import EditProfileContainer from './components/user/editProfile/EditProfileContainer';
 import ImageUploadContainer from './components/media/upload/ImageUploadContainer';
@@ -25,6 +26,8 @@ var routes = (
         <IndexRoute component={MyMemlysContainer} />
         <Route path="/journeys" component={MyJourneysContainer} />
         <Route path='/likedmemlys' component={LikedMemlysContainer} />
+        <Route path='/likedjourneys' component={LikedJourneysContainer}/>
+        <Route path='/edit' component={EditProfileContainer}/>
       </Route>
       <Route path='/photo' component={ImageUploadContainer}/>
       <Route path='/selection' component={SelectionContainer} />
