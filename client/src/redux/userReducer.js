@@ -277,7 +277,7 @@ export default function userReducer (state = userInitialState, action) {
         favouriteJourneys: state.favouriteJourneys.concat([state.nearbyJourneys[action.index]])
       }
     }
-  
+
     default : {
       return state
     }
