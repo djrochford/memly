@@ -11,7 +11,7 @@ class NearbyJourneysContainer extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/test/api/nearbyjourneys')
+    axios.get('/api/nearbyjourneys')
     .then(res => {
       store.dispatch({
         type: 'SET_NEARBY_JOURNEYS',
