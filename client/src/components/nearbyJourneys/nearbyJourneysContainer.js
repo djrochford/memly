@@ -34,21 +34,26 @@ class NearbyJourneysContainer extends React.Component {
   } 
 
   render() {
-    return (
-      <div className = "ProfileBoxes nearbyBox">
-        <div className = "nearbyContainer">
-          <p> Nearby Journeys </p>
-          {this.props.journeys.length && this.props.journeys.map((journey, index) => (
-            <NearbyJourneys index={index} journey={journey} selectJourney={this.selectJourney.bind(this)}/>
-          ))}
+    if (this.props.loggedIn) {
+      return (
+        <div className = "ProfileBoxes nearbyBox">
+          <div className = "nearbyContainer">
+            <p> Nearby Journeys </p>
+            {this.props.journeys.length && this.props.journeys.map((journey, index) => (
+              <NearbyJourneys index={index} journey={journey} selectJourney={this.selectJourney.bind(this)}/>
+            ))}
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (<div></div>)
+    }
   }
 };
 
 const mapStateToProps = (state) => ({
-  journeys: state.userReducer.nearbyJourneys
+  journeys: state.userReducer.nearbyJourneys,
+  loggedIn: state.userReducer.isLoggedIn
 });
 
 export default connect(mapStateToProps)(NearbyJourneysContainer)
