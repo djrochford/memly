@@ -87,10 +87,11 @@ export function setJourneys(journeys) {
   }
 }
 
-export function setCurrentJourney(journeyIndex) {
+export function setCurrentJourney(journeyIndex, callfrom) {
   return {
     type: 'SET_CURRENT_JOURNEY',
-    journeyIndex
+    journeyIndex,
+    callfrom
   }
 }
 
@@ -104,7 +105,7 @@ const userInitialState = {
   error: '',
   likedMemlys: [],
   dislikedMemlys: [],
-  journeys: [],
+  myJourneys: [],
   userLocation: {
     lat: '',
     lng: '',
@@ -114,6 +115,8 @@ const userInitialState = {
   selection: [],
   pageIndex: 0,
   currentJourney: {},
+  nearbyJourneys: [],
+  favouriteJourneys: [],
 }
 
 // ------------ USER REDUCER -----------------//
@@ -249,9 +252,30 @@ export default function userReducer (state = userInitialState, action) {
     }
 
     case 'SET_CURRENT_JOURNEY' : {
+      if (action.callfrom === "myJourneys") {
+        return {
+          ...state,
+          currentJourney: state.myJourneys[action.journeyIndex]
+        }
+      } else {
+        return {
+          ...state,
+          currentJourney: state.favouriteJourneys[action.journeyIndex]
+        }
+      }
+    }
+
+    case 'SET_NEARBY_JOURNEYS': {
       return {
         ...state,
-        currentJourney: state.journeys[action.journeyIndex]
+        nearbyJourneys: action.journeys
+      }
+    }
+
+    case 'ADD_FAVOURITE_JOURNEY': {
+      return {
+        ...state,
+        favouriteJourneys: state.favouriteJourneys.concat([state.nearbyJourneys[action.index]])
       }
     }
   
