@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import GoogleMap from 'google-map-react'
 import MapMemlyContainer from '../memly/container';
-
+import NearbyJourneysContainer from '../../nearbyJourneys/nearbyJourneysContainer.js'
+import {Grid, Row, Col, Nav, NavItem} from 'react-bootstrap'
 // import shallowCompare from 'react-addons-shallow-compare'
 // import controllable from 'react-controllables'
 
@@ -37,7 +38,10 @@ const MapPresentational = (props) => {
   });
 
   return (
-      <div className="map">
+      <Row className="map">
+         <Col md={3} className="nearby-journeys-container">
+          <NearbyJourneysContainer/>
+        </Col>
        <GoogleMap
         /*
          * Using the ES6 spread syntax (...) below, the following props will be passed from the
@@ -65,7 +69,7 @@ const MapPresentational = (props) => {
         />
         {memlys}
       </GoogleMap>
-    </div>
+    </Row>
   );
   }
 }
