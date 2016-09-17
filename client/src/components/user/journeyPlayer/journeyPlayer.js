@@ -13,18 +13,40 @@ const JourneyPlayer = ({journey}) => {
     pauseOnHover: false,
   }
 
+  const capStyle = {
+    backgroundSize: 'cover',
+    backgroundPosition:'center',
+    backgroundRepeat: 'no-repeat',
+  }
+
   if (journey.pages) {
     var images = journey.pages.map((page, index)=>(
       <img src={page.imgUrl}/>
-    ))
+    ));
+    var showCap = journey.pages.map((page, index) => (
+      <img alt={page.caption}/>
+    ));
   } else {
     var images = (<div></div>)
+    var showCap = (<div></div>)
   }
 
+//   if (journey.pages) {
+//   var showCap = journey.pages.map((page, index) => (
+//    <img alt={page.caption} />
+//   ))
+// }
+
+
   return (
-    <Slider {...sliderSettings}>
-      {images}
-    </Slider>
+    <div className = "oneMemly" style = {capStyle}  >
+        <Slider {...sliderSettings}>
+          {images}
+        </Slider>
+        <Slider {...sliderSettings}>
+          {showCap}
+        </Slider>
+    </div>
   )
 };
 
